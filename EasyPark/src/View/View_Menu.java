@@ -11,7 +11,7 @@ public class View_Menu extends javax.swing.JFrame {
    
     public View_Menu() {
         this.setExtendedState(MAXIMIZED_BOTH);
-        //Model_Banco.Open();
+        Model_Banco.Open();
         double largura = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
         double altura = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
         //JOptionPane.showMessageDialog(null, "Altura: " + altura + "\nLargura: " + largura);
