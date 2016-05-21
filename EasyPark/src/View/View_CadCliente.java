@@ -6,14 +6,20 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.text.MaskFormatter;
 import Controller.Ctrl_Msg;
 import Controller.Ctrl_Cliente;
+import Controller.Ctrl_Pessoa;
 import Model.Model_Banco;
 import Model.Model_Cliente;
+import Model.Model_Pessoa;
+import Controller.Ctrl_Endereco;
+import Model.Model_Endereco;
 
 
 
 public class View_CadCliente extends javax.swing.JFrame {
     private static boolean EstaEditando = false;
+    private static Ctrl_Endereco Endereco = new Ctrl_Endereco();
     private static Ctrl_Cliente Cliente = new Ctrl_Cliente();
+    private static Ctrl_Pessoa Pessoa = new Ctrl_Pessoa();
     public View_CadCliente() {
         
         initComponents();
@@ -94,6 +100,11 @@ public class View_CadCliente extends javax.swing.JFrame {
             mensagem = erroGenerico.getMessage();
         }
         txtCPF.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        txtCPF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCPFFocusLost(evt);
+            }
+        });
 
         try
         {
@@ -255,6 +266,11 @@ public class View_CadCliente extends javax.swing.JFrame {
             mensagem = erroGenerico.getMessage();
         }
         txtCEP.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        txtCEP.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCEPFocusLost(evt);
+            }
+        });
 
         cbUF.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         cbUF.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
@@ -536,7 +552,7 @@ public class View_CadCliente extends javax.swing.JFrame {
 
     private void btnSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvar1ActionPerformed
          
-        boolean r =  true;
+        boolean r =  Verifica();
         if (r==true) 
         {
             r = false;
@@ -550,6 +566,7 @@ public class View_CadCliente extends javax.swing.JFrame {
                     String CodNew =  Model_Cliente.Salvar(Cliente);
                     Limpar();
                     txtCod.setText(CodNew);
+                    Ctrl_Msg.Informa(Ctrl_Msg.MsgISalvo);
                 } 
                 catch (Exception e) 
                 {
@@ -568,6 +585,28 @@ public class View_CadCliente extends javax.swing.JFrame {
     private void btnPesqCodMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPesqCodMouseExited
       
     }//GEN-LAST:event_btnPesqCodMouseExited
+
+    private void txtCPFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCPFFocusLost
+        Pessoa.setCod(null);      
+        Pessoa = Model_Pessoa.Verificar(txtCPF.getText());
+                    //ID, CPF, NOME, TELEFONE, CELULAR, EMAIL, NUMERO, CEP
+
+            if (Pessoa.getCod()!=null) 
+            {
+                txtCPF.setText(Pessoa.getCpf());
+                txtNome.setText(Pessoa.getNome());
+                txtFixo.setText(Pessoa.getFixo());
+                txtCelular.setText(Pessoa.getCelular());
+                txtEmail.setText(Pessoa.getEmail());
+                nmrNumero.setValue(Integer.parseInt(Pessoa.getNumero()));
+                txtCEP.setText(Pessoa.getCep());
+                BuscarEndereco();
+            }
+    }//GEN-LAST:event_txtCPFFocusLost
+
+    private void txtCEPFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCEPFocusLost
+       BuscarEndereco();
+    }//GEN-LAST:event_txtCEPFocusLost
 
   
     public static void main(String args[]) {
@@ -745,6 +784,29 @@ public class View_CadCliente extends javax.swing.JFrame {
             }
         }
         return true;
+    }
+    
+    private void BuscarEndereco()
+    {
+        try 
+        {
+            Endereco.setLogradouro(null);
+            Endereco = Model_Endereco.BuscarEndereco(txtCEP.getText().replace("-", ""));
+            if (Endereco.getLogradouro()!=null)
+            {
+                txtCEP.setText(Endereco.getCep());
+                txtRua.setText(Endereco.getLogradouro());
+                cbCidade.addItem(Endereco.getCidade());
+                cbUF.addItem(Endereco.getUf());
+            }
+            
+       
+        } 
+        catch (Exception e) 
+        {
+
+        }
+        
     }
 
 }

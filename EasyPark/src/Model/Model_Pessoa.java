@@ -2,6 +2,7 @@
 package Model;
 
 import Controller.Ctrl_Pessoa;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -50,9 +51,30 @@ public class Model_Pessoa {
         return Model_Banco.Deletar(sqlString);
     }    
     
-    public static Ctrl_Pessoa  Verificar()
+    public static Ctrl_Pessoa  Verificar(String Cpf)
     {
         Ctrl_Pessoa Pessoa = new Ctrl_Pessoa();
+        ResultSet rs = null;
+        String sqlString ="select * from PESSOA where (CPF=" + Cpf + ")";
+        try 
+        {
+            rs = Model_Banco.BuscaRegistro(sqlString);
+            if (rs.next()) 
+            {
+                Pessoa.setCod(rs.getString(1));
+                Pessoa.setCpf(rs.getString(2));
+                Pessoa.setNome(rs.getString(3));
+                Pessoa.setFixo(rs.getString(4));
+                Pessoa.setCelular(rs.getString(5));
+                Pessoa.setEmail(rs.getString(6));
+                Pessoa.setNumero(rs.getString(7));
+                Pessoa.setCelular(rs.getString(8));
+            }
+        } 
+        catch (Exception e) 
+        {
+            return null;
+        }
         return Pessoa;
     }
 }

@@ -64,6 +64,16 @@ public class View_ConCliente extends javax.swing.JFrame {
         txtFiltro.setForeground(java.awt.Color.lightGray);
         txtFiltro.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtFiltro.setText("Informe o código do cliente");
+        txtFiltro.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtFiltroFocusGained(evt);
+            }
+        });
+        txtFiltro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtFiltroMouseClicked(evt);
+            }
+        });
         txtFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFiltroActionPerformed(evt);
@@ -214,6 +224,16 @@ public class View_ConCliente extends javax.swing.JFrame {
     private void rdbCodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbCodActionPerformed
         MudarTexto();
     }//GEN-LAST:event_rdbCodActionPerformed
+
+    private void txtFiltroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFiltroMouseClicked
+       txtFiltro.setText("");
+       txtFiltro.setForeground(Color.black);
+    }//GEN-LAST:event_txtFiltroMouseClicked
+
+    private void txtFiltroFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFiltroFocusGained
+       txtFiltro.setText("");
+       txtFiltro.setForeground(Color.black);
+    }//GEN-LAST:event_txtFiltroFocusGained
 
     /**
      * @param args the command line arguments
