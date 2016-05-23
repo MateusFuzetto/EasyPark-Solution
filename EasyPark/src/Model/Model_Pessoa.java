@@ -4,7 +4,6 @@ package Model;
 import Controller.Ctrl_Pessoa;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class Model_Pessoa {   
 
