@@ -103,7 +103,7 @@ public class View_ConCliente extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Cód", "Nome", "Descrição"
+                "Cód", "Nome", "CPF"
             }
         ));
         jScrollPane1.setViewportView(dtgConCliente);

@@ -37,9 +37,9 @@ public class View_Menu extends javax.swing.JFrame {
         mniCadVaga = new javax.swing.JMenuItem();
         mniCadCliente = new javax.swing.JMenuItem();
         mnConsultas = new javax.swing.JMenu();
-        mniConVaga = new javax.swing.JMenuItem();
-        mniConTipoVaga = new javax.swing.JMenuItem();
         mniConFuncionario = new javax.swing.JMenuItem();
+        mniConTipoVaga = new javax.swing.JMenuItem();
+        mniConVaga = new javax.swing.JMenuItem();
         mniConCliente = new javax.swing.JMenuItem();
         mnControle = new javax.swing.JMenu();
         mniVenda = new javax.swing.JMenuItem();
@@ -55,11 +55,13 @@ public class View_Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu EasyPark");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         mnCadastros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easycad.png"))); // NOI18N
         mnCadastros.setMnemonic('c');
         mnCadastros.setText("Cadastros");
 
+        mniCadEstacionamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasyEstacionamento.png"))); // NOI18N
         mniCadEstacionamento.setMnemonic('e');
         mniCadEstacionamento.setText("Estacionamento");
         mniCadEstacionamento.addActionListener(new java.awt.event.ActionListener() {
@@ -69,6 +71,7 @@ public class View_Menu extends javax.swing.JFrame {
         });
         mnCadastros.add(mniCadEstacionamento);
 
+        mniCadFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasyFuncionario.png"))); // NOI18N
         mniCadFuncionario.setMnemonic('f');
         mniCadFuncionario.setText("Funcionário");
         mniCadFuncionario.addActionListener(new java.awt.event.ActionListener() {
@@ -78,6 +81,7 @@ public class View_Menu extends javax.swing.JFrame {
         });
         mnCadastros.add(mniCadFuncionario);
 
+        mniCadTipoVaga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasyTipoVaga.png"))); // NOI18N
         mniCadTipoVaga.setMnemonic('t');
         mniCadTipoVaga.setText("Tipo Vaga");
         mniCadTipoVaga.addActionListener(new java.awt.event.ActionListener() {
@@ -96,6 +100,7 @@ public class View_Menu extends javax.swing.JFrame {
         });
         mnCadastros.add(mniCadVaga);
 
+        mniCadCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasyCliente.png"))); // NOI18N
         mniCadCliente.setMnemonic('c');
         mniCadCliente.setText("Cliente");
         mniCadCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -107,8 +112,29 @@ public class View_Menu extends javax.swing.JFrame {
 
         mbMenu.add(mnCadastros);
 
+        mnConsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasyConsulta.png"))); // NOI18N
         mnConsultas.setMnemonic('o');
         mnConsultas.setText("Consultas");
+
+        mniConFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasyFuncionario.png"))); // NOI18N
+        mniConFuncionario.setMnemonic('f');
+        mniConFuncionario.setText("Funcionários");
+        mniConFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniConFuncionarioActionPerformed(evt);
+            }
+        });
+        mnConsultas.add(mniConFuncionario);
+
+        mniConTipoVaga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasyTipoVaga.png"))); // NOI18N
+        mniConTipoVaga.setMnemonic('t');
+        mniConTipoVaga.setText("Tipo de Vagas");
+        mniConTipoVaga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniConTipoVagaActionPerformed(evt);
+            }
+        });
+        mnConsultas.add(mniConTipoVaga);
 
         mniConVaga.setMnemonic('v');
         mniConVaga.setText("Vagas");
@@ -120,24 +146,7 @@ public class View_Menu extends javax.swing.JFrame {
         });
         mnConsultas.add(mniConVaga);
 
-        mniConTipoVaga.setMnemonic('t');
-        mniConTipoVaga.setText("Tipo de Vagas");
-        mniConTipoVaga.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniConTipoVagaActionPerformed(evt);
-            }
-        });
-        mnConsultas.add(mniConTipoVaga);
-
-        mniConFuncionario.setMnemonic('f');
-        mniConFuncionario.setText("Funcionários");
-        mniConFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniConFuncionarioActionPerformed(evt);
-            }
-        });
-        mnConsultas.add(mniConFuncionario);
-
+        mniConCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasyCliente.png"))); // NOI18N
         mniConCliente.setMnemonic('c');
         mniConCliente.setText("Clientes");
         mniConCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -149,6 +158,7 @@ public class View_Menu extends javax.swing.JFrame {
 
         mbMenu.add(mnConsultas);
 
+        mnControle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasyControle.png"))); // NOI18N
         mnControle.setMnemonic('n');
         mnControle.setText("Controle");
 
@@ -171,10 +181,12 @@ public class View_Menu extends javax.swing.JFrame {
 
         mbMenu.add(mnControle);
 
+        mnRelatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasyRelatorio.png"))); // NOI18N
         mnRelatorios.setMnemonic('r');
         mnRelatorios.setText("Relatórios");
         mbMenu.add(mnRelatorios);
 
+        mnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasySair.png"))); // NOI18N
         mnSair.setMnemonic('s');
         mnSair.setText("Sair");
         mnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -183,6 +195,7 @@ public class View_Menu extends javax.swing.JFrame {
             }
         });
 
+        mniSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasySair.png"))); // NOI18N
         mniSair.setText("Sair");
         mniSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,23 +208,12 @@ public class View_Menu extends javax.swing.JFrame {
 
         setJMenuBar(mbMenu);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 266, Short.MAX_VALUE)
-        );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void mniCadEstacionamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCadEstacionamentoActionPerformed
-        /*View_CadEstabelecimento frmCadEstabelecimento = new View_CadEstabelecimento();
-        frmCadEstabelecimento.setVisible(true);*/
+        View_CadEstacionamento frmCadEstacionamento = new View_CadEstacionamento();
+        frmCadEstacionamento.setVisible(true);
         
     }//GEN-LAST:event_mniCadEstacionamentoActionPerformed
 
