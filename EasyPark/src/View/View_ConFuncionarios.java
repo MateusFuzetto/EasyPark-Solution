@@ -74,7 +74,7 @@ public class View_ConFuncionarios extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Cód", "Nome", "Descrição"
+                "Cód", "Nome", "CPF"
             }
         ));
         jScrollPane1.setViewportView(dtgConFuncionario);

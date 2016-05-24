@@ -30,7 +30,6 @@ public class View_CadAutorizados extends javax.swing.JFrame {
         btnFechar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         btnDeletar = new javax.swing.JButton();
-        btnPesqCod = new javax.swing.JButton();
         lblCod = new javax.swing.JLabel();
         pnlDadosPessoais = new javax.swing.JPanel();
         lblCPF = new javax.swing.JLabel();
@@ -57,11 +56,13 @@ public class View_CadAutorizados extends javax.swing.JFrame {
         cbUF = new javax.swing.JComboBox<>();
         lblUF = new javax.swing.JLabel();
         txtCod = new javax.swing.JTextField();
+        btnPesqCod = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Autorizados");
         setResizable(false);
         setSize(new java.awt.Dimension(723, 400));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnEditar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyeditar.png"))); // NOI18N
@@ -72,6 +73,7 @@ public class View_CadAutorizados extends javax.swing.JFrame {
                 btnEditarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(173, 330, -1, -1));
 
         btnLimpar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easylimpar.png"))); // NOI18N
@@ -82,6 +84,7 @@ public class View_CadAutorizados extends javax.swing.JFrame {
                 btnLimparActionPerformed(evt);
             }
         });
+        getContentPane().add(btnLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(512, 330, -1, -1));
 
         btnFechar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         btnFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyfechar.png"))); // NOI18N
@@ -92,22 +95,23 @@ public class View_CadAutorizados extends javax.swing.JFrame {
                 btnFecharActionPerformed(evt);
             }
         });
+        getContentPane().add(btnFechar, new org.netbeans.lib.awtextra.AbsoluteConstraints(629, 330, -1, -1));
 
         btnSalvar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easysave.png"))); // NOI18N
         btnSalvar.setText("Salvar");
         btnSalvar.setToolTipText("Clique aqui para salvar os campos");
+        getContentPane().add(btnSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(282, 330, -1, -1));
 
         btnDeletar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         btnDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyexcluir.png"))); // NOI18N
         btnDeletar.setText("Deletar");
         btnDeletar.setToolTipText("Clique aqui para deletar os campos");
-
-        btnPesqCod.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
-        btnPesqCod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easypesq.png"))); // NOI18N
+        getContentPane().add(btnDeletar, new org.netbeans.lib.awtextra.AbsoluteConstraints(393, 330, -1, -1));
 
         lblCod.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         lblCod.setText("Cód:");
+        getContentPane().add(lblCod, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 14, -1, -1));
 
         pnlDadosPessoais.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Pessoais"));
         pnlDadosPessoais.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
@@ -201,7 +205,7 @@ public class View_CadAutorizados extends javax.swing.JFrame {
                         .addComponent(lblEmail)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 645, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(14, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
                         .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblCNH)
@@ -252,6 +256,8 @@ public class View_CadAutorizados extends javax.swing.JFrame {
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25))
         );
+
+        getContentPane().add(pnlDadosPessoais, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 62, -1, 149));
 
         pnlEndereco.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço"));
         pnlEndereco.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
@@ -349,6 +355,8 @@ public class View_CadAutorizados extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        getContentPane().add(pnlEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 222, 728, -1));
+
         txtCod.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         txtCod.setEnabled(false);
         txtCod.addActionListener(new java.awt.event.ActionListener() {
@@ -356,64 +364,32 @@ public class View_CadAutorizados extends javax.swing.JFrame {
                 txtCodActionPerformed(evt);
             }
         });
+        getContentPane().add(txtCod, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 11, 57, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lblCod)
-                        .addGap(4, 4, 4)
-                        .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
-                        .addComponent(btnPesqCod, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
-                        .addComponent(btnEditar)
-                        .addGap(6, 6, 6)
-                        .addComponent(btnSalvar)
-                        .addGap(6, 6, 6)
-                        .addComponent(btnDeletar)
-                        .addGap(6, 6, 6)
-                        .addComponent(btnLimpar)
-                        .addGap(6, 6, 6)
-                        .addComponent(btnFechar)))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlDadosPessoais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+        btnPesqCod.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        btnPesqCod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easypesq.png"))); // NOI18N
+        btnPesqCod.setToolTipText("");
+        btnPesqCod.setBorderPainted(false
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(lblCod))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnPesqCod))
-                .addGap(24, 24, 24)
-                .addComponent(pnlDadosPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(pnlEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEditar)
-                    .addComponent(btnSalvar)
-                    .addComponent(btnDeletar)
-                    .addComponent(btnLimpar)
-                    .addComponent(btnFechar))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
+        btnPesqCod.setContentAreaFilled(false);
+        btnPesqCod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPesqCod.setDefaultCapable(false);
+        btnPesqCod.setFocusPainted(false);
+        btnPesqCod.setFocusable(false);
+        btnPesqCod.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnPesqCod.setMaximumSize(new java.awt.Dimension(38, 44));
+        btnPesqCod.setMinimumSize(null);
+        btnPesqCod.setPreferredSize(new java.awt.Dimension(38, 44));
+        btnPesqCod.setVerifyInputWhenFocusTarget(false);
+        btnPesqCod.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnPesqCodMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnPesqCodMouseExited(evt);
+            }
+        });
+        getContentPane().add(btnPesqCod, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 3, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -433,6 +409,14 @@ public class View_CadAutorizados extends javax.swing.JFrame {
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void btnPesqCodMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPesqCodMouseEntered
+
+    }//GEN-LAST:event_btnPesqCodMouseEntered
+
+    private void btnPesqCodMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPesqCodMouseExited
+
+    }//GEN-LAST:event_btnPesqCodMouseExited
 
  
     public static void main(String args[]) {
