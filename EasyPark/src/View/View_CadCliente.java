@@ -12,6 +12,8 @@ import Model.Model_Cliente;
 import Model.Model_Pessoa;
 import Controller.Ctrl_Endereco;
 import Model.Model_Endereco;
+import javax.swing.JSpinner;
+import javax.swing.text.DefaultFormatter;
 
 
 
@@ -239,10 +241,10 @@ public class View_CadCliente extends javax.swing.JFrame {
         lblNumero.setText("Nº:");
 
         nmrNumero.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        nmrNumero.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10000, 1));
         nmrNumero.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         nmrNumero.setInheritsPopupMenu(true);
         nmrNumero.setOpaque(false);
-        nmrNumero.setModel(new SpinnerNumberModel(0, 0, 10000, 1));
 
         lblCEP.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         lblCEP.setText("CEP:");
@@ -287,21 +289,21 @@ public class View_CadCliente extends javax.swing.JFrame {
                 .addGroup(pnlEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlEnderecoLayout.createSequentialGroup()
                         .addComponent(lblRua)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblNumero)
-                        .addGap(18, 18, 18)
-                        .addComponent(nmrNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nmrNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlEnderecoLayout.createSequentialGroup()
                         .addComponent(lblCEP)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
+                        .addGap(56, 56, 56)
                         .addComponent(lblUF)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbUF, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48)
+                        .addGap(18, 18, 18)
                         .addComponent(lblCidade)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbCidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -326,6 +328,10 @@ public class View_CadCliente extends javax.swing.JFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
+        JSpinner.NumberEditor jsEditor = (javax.swing.JSpinner.NumberEditor)nmrNumero.getEditor();
+        DefaultFormatter formatter = (DefaultFormatter) jsEditor.getTextField().getFormatter();
+        formatter.setAllowsInvalid(false);
+
         btnSalvar1.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         btnSalvar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easysave.png"))); // NOI18N
         btnSalvar1.setText("Salvar");
@@ -338,8 +344,8 @@ public class View_CadCliente extends javax.swing.JFrame {
 
         btnDeletar1.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         btnDeletar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyexcluir.png"))); // NOI18N
-        btnDeletar1.setText("Deletar");
-        btnDeletar1.setToolTipText("Clique aqui para deletar os campos");
+        btnDeletar1.setText("Excluir");
+        btnDeletar1.setToolTipText("Clique aqui para excluir o registro");
         btnDeletar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeletar1ActionPerformed(evt);
