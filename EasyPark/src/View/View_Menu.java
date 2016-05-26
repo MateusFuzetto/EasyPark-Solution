@@ -5,7 +5,6 @@ import Controller.Ctrl_Msg;
 import Model.Model_Banco;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.Toolkit;
-import javax.swing.JOptionPane;
 
 public class View_Menu extends javax.swing.JFrame {
    
@@ -57,10 +56,14 @@ public class View_Menu extends javax.swing.JFrame {
         setTitle("Menu EasyPark");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        mbMenu.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+
         mnCadastros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easycad.png"))); // NOI18N
         mnCadastros.setMnemonic('c');
         mnCadastros.setText("Cadastros");
+        mnCadastros.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
 
+        mniCadEstacionamento.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         mniCadEstacionamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasyEstacionamento.png"))); // NOI18N
         mniCadEstacionamento.setMnemonic('e');
         mniCadEstacionamento.setText("Estacionamento");
@@ -71,6 +74,7 @@ public class View_Menu extends javax.swing.JFrame {
         });
         mnCadastros.add(mniCadEstacionamento);
 
+        mniCadFuncionario.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         mniCadFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasyFuncionario.png"))); // NOI18N
         mniCadFuncionario.setMnemonic('f');
         mniCadFuncionario.setText("Funcionário");
@@ -81,6 +85,7 @@ public class View_Menu extends javax.swing.JFrame {
         });
         mnCadastros.add(mniCadFuncionario);
 
+        mniCadTipoVaga.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         mniCadTipoVaga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasyTipoVaga.png"))); // NOI18N
         mniCadTipoVaga.setMnemonic('t');
         mniCadTipoVaga.setText("Tipo Vaga");
@@ -91,6 +96,8 @@ public class View_Menu extends javax.swing.JFrame {
         });
         mnCadastros.add(mniCadTipoVaga);
 
+        mniCadVaga.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        mniCadVaga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasyVaga.png"))); // NOI18N
         mniCadVaga.setMnemonic('v');
         mniCadVaga.setText("Vaga");
         mniCadVaga.addActionListener(new java.awt.event.ActionListener() {
@@ -100,6 +107,7 @@ public class View_Menu extends javax.swing.JFrame {
         });
         mnCadastros.add(mniCadVaga);
 
+        mniCadCliente.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         mniCadCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasyCliente.png"))); // NOI18N
         mniCadCliente.setMnemonic('c');
         mniCadCliente.setText("Cliente");
@@ -115,7 +123,9 @@ public class View_Menu extends javax.swing.JFrame {
         mnConsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasyConsulta.png"))); // NOI18N
         mnConsultas.setMnemonic('o');
         mnConsultas.setText("Consultas");
+        mnConsultas.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
 
+        mniConFuncionario.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         mniConFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasyFuncionario.png"))); // NOI18N
         mniConFuncionario.setMnemonic('f');
         mniConFuncionario.setText("Funcionários");
@@ -126,6 +136,7 @@ public class View_Menu extends javax.swing.JFrame {
         });
         mnConsultas.add(mniConFuncionario);
 
+        mniConTipoVaga.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         mniConTipoVaga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasyTipoVaga.png"))); // NOI18N
         mniConTipoVaga.setMnemonic('t');
         mniConTipoVaga.setText("Tipo de Vagas");
@@ -136,6 +147,8 @@ public class View_Menu extends javax.swing.JFrame {
         });
         mnConsultas.add(mniConTipoVaga);
 
+        mniConVaga.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        mniConVaga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasyVaga.png"))); // NOI18N
         mniConVaga.setMnemonic('v');
         mniConVaga.setText("Vagas");
         mniConVaga.setToolTipText("");
@@ -146,6 +159,7 @@ public class View_Menu extends javax.swing.JFrame {
         });
         mnConsultas.add(mniConVaga);
 
+        mniConCliente.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         mniConCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasyCliente.png"))); // NOI18N
         mniConCliente.setMnemonic('c');
         mniConCliente.setText("Clientes");
@@ -161,11 +175,15 @@ public class View_Menu extends javax.swing.JFrame {
         mnControle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasyControle.png"))); // NOI18N
         mnControle.setMnemonic('n');
         mnControle.setText("Controle");
+        mnControle.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
 
+        mniVenda.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        mniVenda.setIcon(new javax.swing.ImageIcon("C:\\Users\\lucas\\Desktop\\payment-icon.png")); // NOI18N
         mniVenda.setMnemonic('v');
         mniVenda.setText("Venda");
         mnControle.add(mniVenda);
 
+        mniFinalizacao.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         mniFinalizacao.setMnemonic('f');
         mniFinalizacao.setText("Finalização");
         mniFinalizacao.addActionListener(new java.awt.event.ActionListener() {
@@ -175,6 +193,8 @@ public class View_Menu extends javax.swing.JFrame {
         });
         mnControle.add(mniFinalizacao);
 
+        mniCancelamento.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        mniCancelamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasyCancelamento.png"))); // NOI18N
         mniCancelamento.setMnemonic('c');
         mniCancelamento.setText("Cancelamento");
         mnControle.add(mniCancelamento);
@@ -184,11 +204,13 @@ public class View_Menu extends javax.swing.JFrame {
         mnRelatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasyRelatorio.png"))); // NOI18N
         mnRelatorios.setMnemonic('r');
         mnRelatorios.setText("Relatórios");
+        mnRelatorios.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         mbMenu.add(mnRelatorios);
 
         mnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasySair.png"))); // NOI18N
         mnSair.setMnemonic('s');
         mnSair.setText("Sair");
+        mnSair.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         mnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnSairActionPerformed(evt);

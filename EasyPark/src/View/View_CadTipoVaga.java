@@ -38,7 +38,6 @@ public class View_CadTipoVaga extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Tipo de Vaga");
         setResizable(false);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtCod.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         txtCod.setEnabled(false);
@@ -47,15 +46,12 @@ public class View_CadTipoVaga extends javax.swing.JFrame {
                 txtCodActionPerformed(evt);
             }
         });
-        getContentPane().add(txtCod, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 9, 57, -1));
 
         lblCod.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         lblCod.setText("Cód:");
-        getContentPane().add(lblCod, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 12, -1, -1));
 
         lblDescricao1.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         lblDescricao1.setText("Definição:");
-        getContentPane().add(lblDescricao1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
         btnEditar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyeditar.png"))); // NOI18N
@@ -66,19 +62,16 @@ public class View_CadTipoVaga extends javax.swing.JFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 256, -1, -1));
 
         btnSalvar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easysave.png"))); // NOI18N
         btnSalvar.setText("Salvar");
         btnSalvar.setToolTipText("Clique aqui para salvar os campos");
-        getContentPane().add(btnSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(119, 256, -1, -1));
 
         btnDeletar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         btnDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyexcluir.png"))); // NOI18N
         btnDeletar.setText("Deletar");
         btnDeletar.setToolTipText("Clique aqui para deletar os campos");
-        getContentPane().add(btnDeletar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 256, -1, -1));
 
         btnLimpar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easylimpar.png"))); // NOI18N
@@ -89,7 +82,6 @@ public class View_CadTipoVaga extends javax.swing.JFrame {
                 btnLimparActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(349, 256, -1, -1));
 
         btnFechar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         btnFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyfechar.png"))); // NOI18N
@@ -100,20 +92,15 @@ public class View_CadTipoVaga extends javax.swing.JFrame {
                 btnFecharActionPerformed(evt);
             }
         });
-        getContentPane().add(btnFechar, new org.netbeans.lib.awtextra.AbsoluteConstraints(466, 256, -1, -1));
 
         txtDefinicao.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
-        getContentPane().add(txtDefinicao, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 67, 216, -1));
 
         lblDescricao.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         lblDescricao.setText("Descrição");
-        getContentPane().add(lblDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 111, -1, -1));
 
         txaDescricao.setColumns(20);
         txaDescricao.setRows(5);
         jScrollPane1.setViewportView(txaDescricao);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 137, 565, -1));
 
         btnPesqCod.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         btnPesqCod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easypesq.png"))); // NOI18N
@@ -138,7 +125,72 @@ public class View_CadTipoVaga extends javax.swing.JFrame {
                 btnPesqCodMouseExited(evt);
             }
         });
-        getContentPane().add(btnPesqCod, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 1, -1, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblCod)
+                                .addGap(4, 4, 4)
+                                .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)
+                                .addComponent(btnPesqCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblDescricao1)
+                                .addGap(4, 4, 4)
+                                .addComponent(txtDefinicao, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblDescricao)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnEditar)
+                        .addGap(7, 7, 7)
+                        .addComponent(btnSalvar)
+                        .addGap(5, 5, 5)
+                        .addComponent(btnDeletar)
+                        .addGap(7, 7, 7)
+                        .addComponent(btnLimpar)
+                        .addGap(9, 9, 9)
+                        .addComponent(btnFechar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(1, 1, 1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(lblCod))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnPesqCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(lblDescricao1))
+                    .addComponent(txtDefinicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(lblDescricao)
+                .addGap(6, 6, 6)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnEditar)
+                    .addComponent(btnSalvar)
+                    .addComponent(btnDeletar)
+                    .addComponent(btnLimpar)
+                    .addComponent(btnFechar))
+                .addContainerGap())
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
