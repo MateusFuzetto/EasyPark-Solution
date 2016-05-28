@@ -30,11 +30,11 @@ public class View_Menu extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         mbMenu = new javax.swing.JMenuBar();
         mnCadastros = new javax.swing.JMenu();
+        mniCadCliente = new javax.swing.JMenuItem();
         mniCadEstacionamento = new javax.swing.JMenuItem();
         mniCadFuncionario = new javax.swing.JMenuItem();
         mniCadTipoVaga = new javax.swing.JMenuItem();
         mniCadVaga = new javax.swing.JMenuItem();
-        mniCadCliente = new javax.swing.JMenuItem();
         mnConsultas = new javax.swing.JMenu();
         mniConFuncionario = new javax.swing.JMenuItem();
         mniConTipoVaga = new javax.swing.JMenuItem();
@@ -62,6 +62,17 @@ public class View_Menu extends javax.swing.JFrame {
         mnCadastros.setMnemonic('c');
         mnCadastros.setText("Cadastros");
         mnCadastros.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+
+        mniCadCliente.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        mniCadCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasyCliente.png"))); // NOI18N
+        mniCadCliente.setMnemonic('c');
+        mniCadCliente.setText("Cliente");
+        mniCadCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniCadClienteActionPerformed(evt);
+            }
+        });
+        mnCadastros.add(mniCadCliente);
 
         mniCadEstacionamento.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         mniCadEstacionamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasyEstacionamento.png"))); // NOI18N
@@ -106,17 +117,6 @@ public class View_Menu extends javax.swing.JFrame {
             }
         });
         mnCadastros.add(mniCadVaga);
-
-        mniCadCliente.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
-        mniCadCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasyCliente.png"))); // NOI18N
-        mniCadCliente.setMnemonic('c');
-        mniCadCliente.setText("Cliente");
-        mniCadCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniCadClienteActionPerformed(evt);
-            }
-        });
-        mnCadastros.add(mniCadCliente);
 
         mbMenu.add(mnCadastros);
 
@@ -178,7 +178,6 @@ public class View_Menu extends javax.swing.JFrame {
         mnControle.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
 
         mniVenda.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
-        mniVenda.setIcon(new javax.swing.ImageIcon("C:\\Users\\lucas\\Desktop\\payment-icon.png")); // NOI18N
         mniVenda.setMnemonic('v');
         mniVenda.setText("Venda");
         mnControle.add(mniVenda);
@@ -249,11 +248,6 @@ public class View_Menu extends javax.swing.JFrame {
         frmCadCliente.setVisible(true);
     }//GEN-LAST:event_mniCadClienteActionPerformed
 
-    private void mniCadTipoVagaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCadTipoVagaActionPerformed
-        View_CadTipoVaga frmCadTipoVaga = new View_CadTipoVaga();
-        frmCadTipoVaga.setVisible(true);
-    }//GEN-LAST:event_mniCadTipoVagaActionPerformed
-
     private void mniCadVagaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCadVagaActionPerformed
         View_CadVaga frmCadVaga = new View_CadVaga();
         frmCadVaga.setVisible(true);
@@ -294,6 +288,11 @@ public class View_Menu extends javax.swing.JFrame {
           this.dispose();
         }
     }//GEN-LAST:event_mniSairActionPerformed
+
+    private void mniCadTipoVagaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCadTipoVagaActionPerformed
+        View_CadTipoVaga frmCadTipoVaga = new View_CadTipoVaga();
+        frmCadTipoVaga.setVisible(true);
+    }//GEN-LAST:event_mniCadTipoVagaActionPerformed
 
    
     public static void main(String args[]) {

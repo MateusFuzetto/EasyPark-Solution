@@ -6,6 +6,8 @@
 package View;
 
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import javax.swing.text.DefaultFormatter;
 import javax.swing.text.MaskFormatter;
 
 /**
@@ -36,7 +38,6 @@ public class View_CadVaga extends javax.swing.JFrame {
         btnLimpar = new javax.swing.JButton();
         lblCod = new javax.swing.JLabel();
         txtCod = new javax.swing.JTextField();
-        txtPreco = new javax.swing.JFormattedTextField();
         lblPreco = new javax.swing.JLabel();
         lblTipoVaga = new javax.swing.JLabel();
         cbTipoVaga = new javax.swing.JComboBox<>();
@@ -45,8 +46,11 @@ public class View_CadVaga extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txaDescricao = new javax.swing.JTextArea();
         btnPesqCod = new javax.swing.JButton();
+        nmrNumero = new javax.swing.JSpinner();
+        txtRua = new javax.swing.JTextField();
+        lblRua = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btnEditar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyeditar.png"))); // NOI18N
@@ -88,20 +92,6 @@ public class View_CadVaga extends javax.swing.JFrame {
                 txtCodActionPerformed(evt);
             }
         });
-
-        try
-        {
-            MaskFormatter maskData = new MaskFormatter("###,##");
-            maskData.install(txtPreco);
-        }
-
-        catch (Exception erroGenerico)
-        {
-            String mensagem = "";
-            erroGenerico.printStackTrace();
-            mensagem = erroGenerico.getMessage();
-        }
-        txtPreco.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
 
         lblPreco.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         lblPreco.setText("Preço:");
@@ -153,6 +143,22 @@ public class View_CadVaga extends javax.swing.JFrame {
             }
         });
 
+        /*nmrNumero.setEditor(new JSpinner.NumberEditor(nmrNumero, "0"));
+        JSpinner.NumberEditor jsEditor = (javax.swing.JSpinner.NumberEditor)nmrNumero.getEditor();
+        DefaultFormatter formatter = (DefaultFormatter) jsEditor.getTextField().getFormatter();
+        formatter.setAllowsInvalid(false);*/
+        nmrNumero.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        nmrNumero.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10000, 1));
+        nmrNumero.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        nmrNumero.setInheritsPopupMenu(true);
+        nmrNumero.setOpaque(false);
+        /*nmrNumero.setModel(new SpinnerNumberModel(1, 1, 10000, 1));*/
+
+        txtRua.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+
+        lblRua.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        lblRua.setText("Localização");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,35 +167,42 @@ public class View_CadVaga extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblCod)
-                                .addGap(4, 4, 4)
-                                .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(5, 5, 5)
-                                .addComponent(btnPesqCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblTipoVaga)
-                                .addGap(4, 4, 4)
-                                .addComponent(cbTipoVaga, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(lblPreco)
-                                .addGap(4, 4, 4)
-                                .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblDescricao))
-                        .addGap(0, 160, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnEditar)
-                        .addGap(6, 6, 6)
-                        .addComponent(btnSalvar)
-                        .addGap(6, 6, 6)
-                        .addComponent(btnDeletar)
-                        .addGap(6, 6, 6)
-                        .addComponent(btnLimpar)
-                        .addGap(6, 6, 6)
-                        .addComponent(btnFechar)))
+                        .addComponent(lblDescricao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblPreco)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(nmrNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblCod)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnEditar)
+                                .addGap(6, 6, 6)
+                                .addComponent(btnSalvar)
+                                .addGap(6, 6, 6)
+                                .addComponent(btnDeletar)
+                                .addGap(6, 6, 6)
+                                .addComponent(btnLimpar)
+                                .addGap(6, 6, 6)
+                                .addComponent(btnFechar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnPesqCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblRua)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(102, 102, 102)
+                                        .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lblTipoVaga)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbTipoVaga, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -197,34 +210,40 @@ public class View_CadVaga extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(lblCod))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnPesqCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbTipoVaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
+                        .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTipoVaga)
-                            .addComponent(lblPreco))))
-                .addGap(18, 18, 18)
-                .addComponent(lblDescricao)
-                .addGap(6, 6, 6)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblTipoVaga)
+                                .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbTipoVaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblRua)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblCod)))
+                        .addGap(26, 26, 26))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnPesqCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nmrNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPreco)
+                    .addComponent(lblDescricao))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEditar)
                     .addComponent(btnSalvar)
                     .addComponent(btnDeletar)
                     .addComponent(btnLimpar)
                     .addComponent(btnFechar))
-                .addGap(0, 8, Short.MAX_VALUE))
+                .addGap(0, 21, Short.MAX_VALUE))
         );
+
+        JSpinner.NumberEditor jsEditor = (javax.swing.JSpinner.NumberEditor)nmrNumero.getEditor();
+        DefaultFormatter formatter = (DefaultFormatter) jsEditor.getTextField().getFormatter();
+        formatter.setAllowsInvalid(false);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -301,9 +320,11 @@ public class View_CadVaga extends javax.swing.JFrame {
     private javax.swing.JLabel lblCod;
     private javax.swing.JLabel lblDescricao;
     private javax.swing.JLabel lblPreco;
+    private javax.swing.JLabel lblRua;
     private javax.swing.JLabel lblTipoVaga;
+    private javax.swing.JSpinner nmrNumero;
     private javax.swing.JTextArea txaDescricao;
     private javax.swing.JTextField txtCod;
-    private javax.swing.JFormattedTextField txtPreco;
+    private javax.swing.JTextField txtRua;
     // End of variables declaration//GEN-END:variables
 }

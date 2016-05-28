@@ -1,18 +1,23 @@
 package View;
 
+import Controller.Ctrl_Autorizado;
+import Controller.Ctrl_Endereco;
+import Controller.Ctrl_Msg;
+import Controller.Ctrl_Pessoa;
+import Model.Model_Endereco;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
 import javax.swing.text.DefaultFormatter;
 import javax.swing.text.MaskFormatter;
 
 public class View_CadAutorizados extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CadAutorizados
-     */
+    private static boolean EstaEditando = false;
+    private static Ctrl_Endereco Endereco = new Ctrl_Endereco();
+    private static Ctrl_Autorizado Autorizado = new Ctrl_Autorizado();
+    private static Ctrl_Pessoa Pessoa = new Ctrl_Pessoa();
+    
     public View_CadAutorizados() {
         initComponents();
         centralizarComponente();
@@ -28,10 +33,6 @@ public class View_CadAutorizados extends javax.swing.JFrame {
     private void initComponents() {
 
         btnDeletar = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        btnLimpar = new javax.swing.JButton();
-        btnFechar = new javax.swing.JButton();
-        btnSalvar = new javax.swing.JButton();
         lblCod = new javax.swing.JLabel();
         pnlDadosPessoais = new javax.swing.JPanel();
         lblCPF = new javax.swing.JLabel();
@@ -59,6 +60,13 @@ public class View_CadAutorizados extends javax.swing.JFrame {
         lblUF = new javax.swing.JLabel();
         txtCod = new javax.swing.JTextField();
         btnPesqCod = new javax.swing.JButton();
+        btnEditar1 = new javax.swing.JButton();
+        btnSalvar1 = new javax.swing.JButton();
+        btnDeletar1 = new javax.swing.JButton();
+        btnLimpar1 = new javax.swing.JButton();
+        btnFechar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
 
         btnDeletar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         btnDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyexcluir.png"))); // NOI18N
@@ -69,41 +77,6 @@ public class View_CadAutorizados extends javax.swing.JFrame {
         setTitle("Cadastro de Autorizados");
         setResizable(false);
         setSize(new java.awt.Dimension(723, 400));
-
-        btnEditar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
-        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyeditar.png"))); // NOI18N
-        btnEditar.setText("Editar");
-        btnEditar.setToolTipText("Clique aqui para editar os campos");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-
-        btnLimpar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
-        btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easylimpar.png"))); // NOI18N
-        btnLimpar.setText("Limpar");
-        btnLimpar.setToolTipText("Clique aqui para limpar os campos");
-        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimparActionPerformed(evt);
-            }
-        });
-
-        btnFechar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
-        btnFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyfechar.png"))); // NOI18N
-        btnFechar.setText("Fechar");
-        btnFechar.setToolTipText("Clique aqui para fechar");
-        btnFechar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFecharActionPerformed(evt);
-            }
-        });
-
-        btnSalvar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
-        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easysave.png"))); // NOI18N
-        btnSalvar.setText("Salvar");
-        btnSalvar.setToolTipText("Clique aqui para salvar os campos");
 
         lblCod.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         lblCod.setText("Cód:");
@@ -249,7 +222,7 @@ public class View_CadAutorizados extends javax.swing.JFrame {
                 .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEmail)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25))
+                .addGap(16, 16, 16))
         );
 
         pnlEndereco.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço"));
@@ -309,7 +282,7 @@ public class View_CadAutorizados extends javax.swing.JFrame {
                         .addComponent(lblRua)
                         .addGap(18, 18, 18)
                         .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblNumero)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nmrNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -385,59 +358,123 @@ public class View_CadAutorizados extends javax.swing.JFrame {
             }
         });
 
+        btnEditar1.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        btnEditar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyeditar.png"))); // NOI18N
+        btnEditar1.setText("Editar");
+        btnEditar1.setToolTipText("Clique aqui para editar os campos");
+        btnEditar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditar1ActionPerformed(evt);
+            }
+        });
+
+        btnSalvar1.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        btnSalvar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easysave.png"))); // NOI18N
+        btnSalvar1.setText("Salvar");
+        btnSalvar1.setToolTipText("Clique aqui para salvar os campos");
+        btnSalvar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvar1ActionPerformed(evt);
+            }
+        });
+
+        btnDeletar1.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        btnDeletar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyexcluir.png"))); // NOI18N
+        btnDeletar1.setText("Excluir");
+        btnDeletar1.setToolTipText("Clique aqui para excluir o registro");
+        btnDeletar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletar1ActionPerformed(evt);
+            }
+        });
+
+        btnLimpar1.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        btnLimpar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easylimpar.png"))); // NOI18N
+        btnLimpar1.setText("Limpar");
+        btnLimpar1.setToolTipText("Clique aqui para limpar os campos");
+        btnLimpar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpar1ActionPerformed(evt);
+            }
+        });
+
+        btnFechar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        btnFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyfechar.png"))); // NOI18N
+        btnFechar.setText("Fechar");
+        btnFechar.setToolTipText("Clique aqui para fechar");
+        btnFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFecharActionPerformed(evt);
+            }
+        });
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(pnlEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblCod)
-                                    .addGap(4, 4, 4)
-                                    .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(1, 1, 1)
-                                    .addComponent(btnPesqCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(pnlDadosPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblCod)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnPesqCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pnlDadosPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnlEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnEditar)
-                        .addGap(6, 6, 6)
-                        .addComponent(btnSalvar)
-                        .addGap(119, 119, 119)
-                        .addComponent(btnLimpar)
-                        .addGap(6, 6, 6)
+                        .addComponent(btnEditar1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSalvar1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDeletar1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLimpar1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnFechar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(3, 3, 3)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(lblCod))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnPesqCod, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblCod))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnPesqCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
-                .addComponent(pnlDadosPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
-                .addComponent(pnlEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEditar)
-                    .addComponent(btnSalvar)
-                    .addComponent(btnLimpar)
+                        .addComponent(pnlDadosPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13)
+                        .addComponent(pnlEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEditar1)
+                    .addComponent(btnSalvar1)
+                    .addComponent(btnDeletar1)
+                    .addComponent(btnLimpar1)
                     .addComponent(btnFechar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -447,18 +484,6 @@ public class View_CadAutorizados extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtCodActionPerformed
 
-    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnFecharActionPerformed
-
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-
-    }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLimparActionPerformed
-
     private void btnPesqCodMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPesqCodMouseEntered
 
     }//GEN-LAST:event_btnPesqCodMouseEntered
@@ -466,6 +491,83 @@ public class View_CadAutorizados extends javax.swing.JFrame {
     private void btnPesqCodMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPesqCodMouseExited
 
     }//GEN-LAST:event_btnPesqCodMouseExited
+
+    private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
+        boolean r = Verifica();
+        if (r==true)
+        {
+            r =false;
+            r =  Ctrl_Msg.Questiona(Ctrl_Msg.MsgQEditar);
+            if (r==true)
+            {
+                Bloqueia(false);
+                EstaEditando=true;
+            }
+        }
+    }//GEN-LAST:event_btnEditar1ActionPerformed
+
+    private void btnSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvar1ActionPerformed
+
+        boolean r =  Verifica();
+        if (r==true)
+        {
+            r = false;
+            r = Ctrl_Msg.Questiona(Ctrl_Msg.MsgQSalvar);
+            if (r==true)
+            {
+
+                try
+                {
+                    Atribuir(true);
+                   // String CodNew =  Model_Autorizado.Salvar(Autorizado);
+                    Limpar();
+                    //txtCod.setText(CodNew);
+                    Ctrl_Msg.Informa(Ctrl_Msg.MsgISalvo);
+                }
+                catch (Exception e)
+                {
+                    Ctrl_Msg.Informa(Ctrl_Msg.MsgErro);
+                }
+            }
+
+        }
+    }//GEN-LAST:event_btnSalvar1ActionPerformed
+
+    private void btnDeletar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletar1ActionPerformed
+        
+        if (EstaEditando==true)
+        {
+            boolean r =  Ctrl_Msg.Questiona(Ctrl_Msg.MsgQDeletar);
+            if (r==true) {
+                //metodo de excluir
+            }
+        }
+        else
+        {
+            Ctrl_Msg.Informa(Ctrl_Msg.MsgIEdicao);
+        }
+    }//GEN-LAST:event_btnDeletar1ActionPerformed
+
+    private void btnLimpar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpar1ActionPerformed
+
+        boolean r =  Ctrl_Msg.Questiona(Ctrl_Msg.MsgQLimpar);
+        if (r==true)
+        {
+            Limpar();
+        }
+
+    }//GEN-LAST:event_btnLimpar1ActionPerformed
+
+    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
+
+        boolean r =  Ctrl_Msg.Questiona(Ctrl_Msg.MsgQFechar);
+        if (r==true)
+        {
+            this.dispose();
+
+        }
+
+    }//GEN-LAST:event_btnFecharActionPerformed
 
  
     public static void main(String args[]) {
@@ -509,13 +611,16 @@ public class View_CadAutorizados extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDeletar;
-    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnDeletar1;
+    private javax.swing.JButton btnEditar1;
     private javax.swing.JButton btnFechar;
-    private javax.swing.JButton btnLimpar;
+    private javax.swing.JButton btnLimpar1;
     private javax.swing.JButton btnPesqCod;
-    private javax.swing.JButton btnSalvar;
+    private javax.swing.JButton btnSalvar1;
     private javax.swing.JComboBox<String> cbCidade;
     private javax.swing.JComboBox<String> cbUF;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCEP;
     private javax.swing.JLabel lblCNH;
     private javax.swing.JLabel lblCPF;
@@ -541,4 +646,130 @@ public class View_CadAutorizados extends javax.swing.JFrame {
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtRua;
     // End of variables declaration//GEN-END:variables
+
+     private void Limpar(){
+        txtCod.setText("");
+        txtCNH.setText("");
+        txtCPF.setText("");
+        txtCelular.setText("");
+        txtFixo.setText("");
+        txtNome.setText("");
+        txtEmail.setText("");
+        txtCEP.setText("");
+        //cbUF."");
+        //cbCidade.("");
+        txtRua.setText("");
+        nmrNumero.setValue(0);
+    }
+    
+    private void Bloqueia (boolean Bloqueiar)
+    {
+        if (Bloqueiar == true) 
+        {
+            txtCNH.setEnabled(false);
+            txtCPF.setEnabled(false);
+            txtCelular.setEnabled(false);
+            txtFixo.setEnabled(false);
+            txtNome.setEnabled(false);
+            txtEmail.setEnabled(false);
+            txtCEP.setEnabled(false);
+            cbUF.setEnabled(false);
+            cbCidade.setEnabled(false);
+            txtRua.setEnabled(false);
+            nmrNumero.setEnabled(false);
+        }
+        else
+        {
+            txtCNH.setEnabled(true);
+            txtCPF.setEnabled(true);
+            txtCelular.setEnabled(true);
+            txtFixo.setEnabled(true);
+            txtNome.setEnabled(true);
+            txtEmail.setEnabled(true);
+            txtCEP.setEnabled(true);
+            cbUF.setEnabled(true);
+            cbCidade.setEnabled(true);
+            txtRua.setEnabled(true);
+            nmrNumero.setEnabled(true);
+        }
+          
+    }
+
+    
+    private void Atribuir(boolean Vai)
+    {
+        if (Vai==true) {
+            Autorizado.setCod(txtCod.getText());
+            Autorizado.setCnh(txtCNH.getText());
+            Autorizado.setCpf(txtCPF.getText());
+            Autorizado.setCelular(txtCelular.getText());
+            Autorizado.setFixo(txtFixo.getText());
+            Autorizado.setNome(txtNome.getText());
+            Autorizado.setEmail(txtEmail.getText());
+            Autorizado.setCep(txtCEP.getText());
+            Autorizado.setNumero(String.valueOf(nmrNumero.getValue()));
+        }
+        else
+        {
+            txtCod.setText(Autorizado.getCod());
+            txtCNH.setText(Autorizado.getCnh());
+            txtCPF.setText(Autorizado.getCpf());
+            txtCelular.setText(Autorizado.getCelular());
+            txtFixo.setText(Autorizado.getFixo());
+            txtNome.setText(Autorizado.getNome());
+            txtEmail.setText(Autorizado.getEmail());
+            txtCEP.setText(Autorizado.getCep());
+            nmrNumero.setValue(Integer.parseInt(Autorizado.getNumero()));    
+        }
+
+    }
+    
+    private  boolean Verifica()
+    {
+        String x[] = new String[10];
+        x[0] = txtCod.getText();
+        x [1] = txtCNH.getText();
+        x [2] = txtCPF.getText();
+        x [3] = txtCelular.getText();
+        x [4] = txtFixo.getText();
+        x [5] = txtNome.getText();
+        x [6] = txtEmail.getText();
+        x [7] = txtCEP.getText();
+        x [8] = txtRua.getText();
+        x [9] =String.valueOf(nmrNumero.getValue());
+        
+        for (int i = 0; i < 10; i++) {
+            if(x[i].equals(""))
+            {
+                Ctrl_Msg.Informa(Ctrl_Msg.MsgICampos);
+                return false; 
+            }
+        }
+        return true;
+    }
+    
+    private void BuscarEndereco()
+    {
+        try 
+        {
+            Endereco.setLogradouro(null);
+            Endereco = Model_Endereco.BuscarEndereco(txtCEP.getText().replace("-", ""));
+            if (Endereco.getLogradouro()!=null)
+            {
+                txtCEP.setText(Endereco.getCep());
+                txtRua.setText(Endereco.getLogradouro());
+                cbCidade.addItem(Endereco.getCidade());
+                cbUF.addItem(Endereco.getUf());
+            }
+            
+       
+        } 
+        catch (Exception e) 
+        {
+
+        }
+        
+    }
+
 }
+
