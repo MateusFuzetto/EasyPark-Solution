@@ -54,12 +54,14 @@ public class Model_Pessoa {
     {
         Ctrl_Pessoa Pessoa = new Ctrl_Pessoa();
         ResultSet rs = null;
-        String sqlString ="select * from PESSOA where (CPF=" + Cpf + ")";
+        String sqlString ="select * from PESSOA where (CPF='" + Cpf + "')";
         try 
         {
             rs = Model_Banco.BuscaRegistro(sqlString);
             if (rs.next()) 
             {
+                //ID, CPF, NOME, TELEFONE, CELULAR, EMAIL, NUMERO, CEP
+
                 Pessoa.setCod(rs.getString(1));
                 Pessoa.setCpf(rs.getString(2));
                 Pessoa.setNome(rs.getString(3));
@@ -67,7 +69,7 @@ public class Model_Pessoa {
                 Pessoa.setCelular(rs.getString(5));
                 Pessoa.setEmail(rs.getString(6));
                 Pessoa.setNumero(rs.getString(7));
-                Pessoa.setCelular(rs.getString(8));
+                Pessoa.setCep(rs.getString(8));
             }
         } 
         catch (Exception e) 
