@@ -62,7 +62,7 @@ public class Model_Pessoa {
             {
                 //ID, CPF, NOME, TELEFONE, CELULAR, EMAIL, NUMERO, CEP
 
-                Pessoa.setCod(rs.getString(1));
+                Pessoa.setId(rs.getString(1));
                 Pessoa.setCpf(rs.getString(2));
                 Pessoa.setNome(rs.getString(3));
                 Pessoa.setFixo(rs.getString(4));

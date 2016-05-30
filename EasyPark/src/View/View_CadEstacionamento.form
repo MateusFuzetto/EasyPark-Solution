@@ -417,7 +417,7 @@
     </Container>
     <Component class="javax.swing.JTextField" name="txtCod">
       <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor" postCode="try {&#xa;txtCod.setText(Model_Banco.BuscaCodigoNovo(&quot;ESTACIONAMENTO&quot;));&#xa;} catch (Exception e) {&#xa;}">
           <Font name="Segoe UI Historic" size="14" style="0"/>
         </Property>
         <Property name="enabled" type="boolean" value="false"/>

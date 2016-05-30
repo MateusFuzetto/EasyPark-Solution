@@ -602,10 +602,10 @@ public class View_CadCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCEPFocusLost
 
     private void txtCPFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCPFFocusLost
-        Pessoa.setCod(null);
+        Pessoa.setId(null);
         Pessoa = Model_Pessoa.Verificar(txtCPF.getText());
 
-        if (Pessoa.getCod()!=null)
+        if (Pessoa.getId()!=null)
         {
             txtCPF.setText(Pessoa.getCpf());
             txtNome.setText(Pessoa.getNome());
@@ -627,10 +627,8 @@ public class View_CadCliente extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+               javax.swing.UIManager.setLookAndFeel("Metal");
                     break;
-                }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(View_CadCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -747,7 +745,7 @@ public class View_CadCliente extends javax.swing.JFrame {
     private void Atribuir(boolean Vai)
     {
         if (Vai==true) {
-            Cliente.setCod(txtCod.getText());
+            Cliente.setId(txtCod.getText());
             Cliente.setCnh(txtCNH.getText());
             Cliente.setCpf(txtCPF.getText());
             Cliente.setCelular(txtCelular.getText());
@@ -759,7 +757,7 @@ public class View_CadCliente extends javax.swing.JFrame {
         }
         else
         {
-            txtCod.setText(Cliente.getCod());
+            txtCod.setText(Cliente.getId());
             txtCNH.setText(Cliente.getCnh());
             txtCPF.setText(Cliente.getCpf());
             txtCelular.setText(Cliente.getCelular());

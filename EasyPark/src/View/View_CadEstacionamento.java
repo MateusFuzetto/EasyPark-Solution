@@ -4,6 +4,7 @@ package View;
 import Controller.Ctrl_Endereco;
 import Controller.Ctrl_Estacionamento;
 import Controller.Ctrl_Msg;
+import Model.Model_Banco;
 import Model.Model_Estacionamento;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -269,6 +270,10 @@ public class View_CadEstacionamento extends javax.swing.JFrame {
         );
 
         txtCod.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        try {
+            txtCod.setText(Model_Banco.BuscaCodigoNovo("ESTACIONAMENTO"));
+        } catch (Exception e) {
+        }
         txtCod.setEnabled(false);
         txtCod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -545,7 +550,6 @@ public class View_CadEstacionamento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDeletar1;
-    private javax.swing.JButton btnEditar1;
     private javax.swing.JButton btnEditar2;
     private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnLimpar1;

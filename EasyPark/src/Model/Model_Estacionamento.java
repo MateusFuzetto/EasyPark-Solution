@@ -54,7 +54,7 @@ public class Model_Estacionamento {
            String sqlString ="SELECT * FROM PESSOA WHERE (ID="+Id_Pessoa+")";
            rs = Model_Banco.BuscaRegistro(sqlString);
            if (rs.next()) {   
-                Cliente.setCod(rs.getString(1));
+                Cliente.setId(rs.getString(1));
                 Cliente.setCpf(rs.getString(2));
                 Cliente.setNome(rs.getString(3));
                 Cliente.setFixo(rs.getString(4));

@@ -1,20 +1,24 @@
 package View;
 
+import Controller.Ctrl_Endereco;
+import Controller.Ctrl_Funcionario;
+import Controller.Ctrl_Msg;
+import Controller.Ctrl_Pessoa;
+import Model.Model_Banco;
+import Model.Model_Endereco;
+import Model.Model_Funcionario;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFormattedTextField;
-import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
 import javax.swing.text.DefaultFormatter;
 import javax.swing.text.MaskFormatter;
 
 public class View_CadFuncionario extends javax.swing.JFrame {
 
-  
+    private static boolean EstaEditando = false;
+    private static Ctrl_Endereco Endereco = new Ctrl_Endereco();
+    private static Ctrl_Funcionario Funcionario = new Ctrl_Funcionario();
+    private static Ctrl_Pessoa Pessoa = new Ctrl_Pessoa();
     public View_CadFuncionario() {
         initComponents();
         centralizarComponente();
@@ -56,12 +60,12 @@ public class View_CadFuncionario extends javax.swing.JFrame {
         lblCEP = new javax.swing.JLabel();
         nmrNumero = new javax.swing.JSpinner();
         lblNumero = new javax.swing.JLabel();
-        btnEditar = new javax.swing.JButton();
-        btnSalvar = new javax.swing.JButton();
-        btnDeletar = new javax.swing.JButton();
-        btnLimpar = new javax.swing.JButton();
-        btnFechar = new javax.swing.JButton();
         btnPesqCod = new javax.swing.JButton();
+        btnEditar2 = new javax.swing.JButton();
+        btnSalvar2 = new javax.swing.JButton();
+        btnDeletar2 = new javax.swing.JButton();
+        btnLimpar2 = new javax.swing.JButton();
+        btnFechar = new javax.swing.JButton();
 
         btnEditar1.setText("Editar");
         btnEditar1.setToolTipText("Clique aqui para editar os campos");
@@ -83,6 +87,10 @@ public class View_CadFuncionario extends javax.swing.JFrame {
         setResizable(false);
 
         txtCod.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        try {
+            txtCod.setText(Model_Banco.BuscaCodigoNovo("FUNCIONARIO"));
+        } catch (Exception e) {
+        }
         txtCod.setEnabled(false);
         txtCod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -334,46 +342,6 @@ public class View_CadFuncionario extends javax.swing.JFrame {
         DefaultFormatter formatter = (DefaultFormatter) jsEditor.getTextField().getFormatter();
         formatter.setAllowsInvalid(false);
 
-        btnEditar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
-        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyeditar.png"))); // NOI18N
-        btnEditar.setText("Editar");
-        btnEditar.setToolTipText("Clique aqui para editar os campos");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-
-        btnSalvar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
-        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easysave.png"))); // NOI18N
-        btnSalvar.setText("Salvar");
-        btnSalvar.setToolTipText("Clique aqui para salvar os campos");
-
-        btnDeletar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
-        btnDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyexcluir.png"))); // NOI18N
-        btnDeletar.setText("Deletar");
-        btnDeletar.setToolTipText("Clique aqui para deletar os campos");
-
-        btnLimpar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
-        btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easylimpar.png"))); // NOI18N
-        btnLimpar.setText("Limpar");
-        btnLimpar.setToolTipText("Clique aqui para limpar os campos");
-        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimparActionPerformed(evt);
-            }
-        });
-
-        btnFechar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
-        btnFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyfechar.png"))); // NOI18N
-        btnFechar.setText("Fechar");
-        btnFechar.setToolTipText("Clique aqui para fechar");
-        btnFechar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFecharActionPerformed(evt);
-            }
-        });
-
         btnPesqCod.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         btnPesqCod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easypesq.png"))); // NOI18N
         btnPesqCod.setToolTipText("");
@@ -398,24 +366,63 @@ public class View_CadFuncionario extends javax.swing.JFrame {
             }
         });
 
+        btnEditar2.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        btnEditar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyeditar.png"))); // NOI18N
+        btnEditar2.setText("Editar");
+        btnEditar2.setToolTipText("Clique aqui para editar os campos");
+        btnEditar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditar2ActionPerformed(evt);
+            }
+        });
+
+        btnSalvar2.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        btnSalvar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easysave.png"))); // NOI18N
+        btnSalvar2.setText("Salvar");
+        btnSalvar2.setToolTipText("Clique aqui para salvar os campos");
+        btnSalvar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvar2ActionPerformed(evt);
+            }
+        });
+
+        btnDeletar2.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        btnDeletar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyexcluir.png"))); // NOI18N
+        btnDeletar2.setText("Excluir");
+        btnDeletar2.setToolTipText("Clique aqui para excluir o registro");
+        btnDeletar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletar2ActionPerformed(evt);
+            }
+        });
+
+        btnLimpar2.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        btnLimpar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easylimpar.png"))); // NOI18N
+        btnLimpar2.setText("Limpar");
+        btnLimpar2.setToolTipText("Clique aqui para limpar os campos");
+        btnLimpar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpar2ActionPerformed(evt);
+            }
+        });
+
+        btnFechar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        btnFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyfechar.png"))); // NOI18N
+        btnFechar.setText("Fechar");
+        btnFechar.setToolTipText("Clique aqui para fechar");
+        btnFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFecharActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnEditar)
-                        .addGap(6, 6, 6)
-                        .addComponent(btnSalvar)
-                        .addGap(6, 6, 6)
-                        .addComponent(btnDeletar)
-                        .addGap(6, 6, 6)
-                        .addComponent(btnLimpar)
-                        .addGap(5, 5, 5)
-                        .addComponent(btnFechar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
@@ -427,8 +434,19 @@ public class View_CadFuncionario extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addComponent(pnlDadosPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(pnlEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 8, Short.MAX_VALUE))
+                    .addComponent(pnlEndereco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnEditar2)
+                        .addGap(5, 5, 5)
+                        .addComponent(btnSalvar2)
+                        .addGap(5, 5, 5)
+                        .addComponent(btnDeletar2)
+                        .addGap(5, 5, 5)
+                        .addComponent(btnLimpar2)
+                        .addGap(5, 5, 5)
+                        .addComponent(btnFechar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -447,12 +465,12 @@ public class View_CadFuncionario extends javax.swing.JFrame {
                 .addComponent(pnlDadosPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
                 .addComponent(pnlEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEditar)
-                    .addComponent(btnSalvar)
-                    .addComponent(btnDeletar)
-                    .addComponent(btnLimpar)
+                    .addComponent(btnEditar2)
+                    .addComponent(btnSalvar2)
+                    .addComponent(btnDeletar2)
+                    .addComponent(btnLimpar2)
                     .addComponent(btnFechar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -464,81 +482,6 @@ public class View_CadFuncionario extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtCodActionPerformed
 
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-
-        Object[] botoes = {"Sim", "Não"};
-        int resp = JOptionPane.showOptionDialog(
-            null,
-            "Deseja editar este registro?",
-            "Confirmação",
-            JOptionPane.DEFAULT_OPTION,
-            JOptionPane.QUESTION_MESSAGE,
-            null,
-            botoes,
-            botoes[0]
-        );
-
-        if (resp == 0)
-        {
-            txtCod.setEnabled(true);
-        }
-        else
-        {
-            txtCod.setEnabled(false);
-        }
-
-    }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        Object[] botoes = {"Sim", "Não"};
-        int resp = JOptionPane.showOptionDialog(
-            null,
-            "Deseja limpar todos os campos? ",
-            "Confirmação",
-            JOptionPane.DEFAULT_OPTION,
-            JOptionPane.QUESTION_MESSAGE,
-            null,
-            botoes,
-            botoes[0]
-        );
-
-        if (resp == 0)
-        {
-            txtCEP.setText("");
-            txtCPF.setText("");
-            txtCelular.setText("");
-            txtEmail.setText("");
-            txtFixo.setText("");
-            txtLogin.setText("");
-            txtNome.setText("");
-            txtRua.setText("");
-
-            if (txtCod.isEnabled() == true)
-            {
-                txtCod.setText("");
-            }
-        }
-    }//GEN-LAST:event_btnLimparActionPerformed
-
-    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
-        Object[] botoes = {"Sim", "Não"};
-        int resp = JOptionPane.showOptionDialog(
-            null,
-            "Deseja realmente sair? ",
-            "Confirmação",
-            JOptionPane.DEFAULT_OPTION,
-            JOptionPane.QUESTION_MESSAGE,
-            null,
-            botoes,
-            botoes[0]
-        );
-
-        if (resp == 0)
-        {
-            this.dispose();
-        }
-    }//GEN-LAST:event_btnFecharActionPerformed
-
     private void btnPesqCodMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPesqCodMouseEntered
 
     }//GEN-LAST:event_btnPesqCodMouseEntered
@@ -546,6 +489,82 @@ public class View_CadFuncionario extends javax.swing.JFrame {
     private void btnPesqCodMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPesqCodMouseExited
 
     }//GEN-LAST:event_btnPesqCodMouseExited
+
+    private void btnEditar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar2ActionPerformed
+        boolean r = Verifica();
+        if (r==true)
+        {
+            r =false;
+            r =  Ctrl_Msg.Questiona(Ctrl_Msg.MsgQEditar);
+            if (r==true)
+            {
+                Bloqueia(false);
+                EstaEditando=true;
+            }
+        }
+    }//GEN-LAST:event_btnEditar2ActionPerformed
+
+    private void btnSalvar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvar2ActionPerformed
+
+        boolean r =  Verifica();
+        if (r==true)
+        {
+            r = false;
+            r = Ctrl_Msg.Questiona(Ctrl_Msg.MsgQSalvar);
+            if (r==true)
+            {
+
+                try
+                {
+                    Atribuir(true);
+                    String CodNew =  Model_Funcionario.Salvar(Funcionario);
+                    Limpar();
+                    txtCod.setText(CodNew);
+                    Ctrl_Msg.Informa(Ctrl_Msg.MsgISalvo);
+                }
+                catch (Exception e)
+                {
+                    Ctrl_Msg.Informa(Ctrl_Msg.MsgErro);
+                }
+            }
+
+        }
+    }//GEN-LAST:event_btnSalvar2ActionPerformed
+
+    private void btnDeletar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletar2ActionPerformed
+        if (EstaEditando==true)
+        {
+            boolean r =  Ctrl_Msg.Questiona(Ctrl_Msg.MsgQDeletar);
+            if (r==true) {
+                //metodo de excluir
+            }
+        }
+        else
+        {
+            Ctrl_Msg.Informa(Ctrl_Msg.MsgIEdicao);
+        }
+    }//GEN-LAST:event_btnDeletar2ActionPerformed
+
+    private void btnLimpar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpar2ActionPerformed
+
+        boolean r =  Ctrl_Msg.Questiona(Ctrl_Msg.MsgQLimpar);
+        if (r==true)
+        {
+            Limpar();
+        }
+
+    }//GEN-LAST:event_btnLimpar2ActionPerformed
+
+    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
+
+        boolean r =  Ctrl_Msg.Questiona(Ctrl_Msg.MsgQFechar);
+        if (r==true)
+        {
+            this.dispose();
+
+        }
+
+    }//GEN-LAST:event_btnFecharActionPerformed
 
   
     public static void main(String args[]) {
@@ -582,17 +601,17 @@ public class View_CadFuncionario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnDeletar1;
-    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnDeletar2;
     private javax.swing.JButton btnEditar1;
+    private javax.swing.JButton btnEditar2;
     private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnFechar1;
-    private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnLimpar1;
+    private javax.swing.JButton btnLimpar2;
     private javax.swing.JButton btnPesqCod;
-    private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnSalvar1;
+    private javax.swing.JButton btnSalvar2;
     private javax.swing.JComboBox<String> cbCidade;
     private javax.swing.JComboBox<String> cbUF;
     private javax.swing.JLabel lblCEP;
@@ -620,4 +639,131 @@ public class View_CadFuncionario extends javax.swing.JFrame {
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtRua;
     // End of variables declaration//GEN-END:variables
+  private void Limpar(){
+        txtCod.setText("");
+        txtLogin.setText("");
+        txtCPF.setText("");
+        txtCelular.setText("");
+        txtFixo.setText("");
+        txtNome.setText("");
+        txtEmail.setText("");
+        txtCEP.setText("");
+        //cbUF."");
+        //cbCidade.("");
+        txtRua.setText("");
+        nmrNumero.setValue(0);
+    }
+    
+    private void Bloqueia (boolean Bloqueiar)
+    {
+        if (Bloqueiar == true) 
+        {
+            txtLogin.setEnabled(false);
+            txtCPF.setEnabled(false);
+            txtCelular.setEnabled(false);
+            txtFixo.setEnabled(false);
+            txtNome.setEnabled(false);
+            txtEmail.setEnabled(false);
+            txtCEP.setEnabled(false);
+            cbUF.setEnabled(false);
+            cbCidade.setEnabled(false);
+            txtRua.setEnabled(false);
+            nmrNumero.setEnabled(false);
+        }
+        else
+        {
+            txtLogin.setEnabled(true);
+            txtCPF.setEnabled(true);
+            txtCelular.setEnabled(true);
+            txtFixo.setEnabled(true);
+            txtNome.setEnabled(true);
+            txtEmail.setEnabled(true);
+            txtCEP.setEnabled(true);
+            cbUF.setEnabled(true);
+            cbCidade.setEnabled(true);
+            txtRua.setEnabled(true);
+            nmrNumero.setEnabled(true);
+        }
+          
+    }
+
+    
+    private void Atribuir(boolean Vai)
+    {
+        if (Vai==true) {
+            Funcionario.setId(txtCod.getText());
+            Funcionario.setLogin(txtLogin.getText());
+            Funcionario.setCpf(txtCPF.getText());
+            Funcionario.setCelular(txtCelular.getText());
+            Funcionario.setFixo(txtFixo.getText());
+            Funcionario.setNome(txtNome.getText());
+            Funcionario.setEmail(txtEmail.getText());
+            Funcionario.setCep(txtCEP.getText());
+            Funcionario.setNumero(String.valueOf(nmrNumero.getValue()));
+        }
+        else
+        {
+            txtCod.setText(Funcionario.getId());
+            txtLogin.setText(Funcionario.getLogin());
+            txtCPF.setText(Funcionario.getCpf());
+            txtCelular.setText(Funcionario.getCelular());
+            txtFixo.setText(Funcionario.getFixo());
+            txtNome.setText(Funcionario.getNome());
+            txtEmail.setText(Funcionario.getEmail());
+            txtCEP.setText(Funcionario.getCep());
+            nmrNumero.setValue(Integer.parseInt(Funcionario.getNumero()));    
+        }
+
+    }
+    
+    private  boolean Verifica()
+    {
+        String x[] = new String[10];
+        x[0] = txtCod.getText();
+        x [1] = txtLogin.getText();
+        x [2] = txtCPF.getText();
+        x [3] = txtCelular.getText();
+        x [4] = txtFixo.getText();
+        x [5] = txtNome.getText();
+        x [6] = txtEmail.getText();
+        x [7] = txtCEP.getText();
+        x [8] = txtRua.getText();
+        x [9] =String.valueOf(nmrNumero.getValue());
+        
+        for (int i = 0; i < 10; i++) {
+            if(x[i].equals(""))
+            {
+                Ctrl_Msg.Informa(Ctrl_Msg.MsgICampos);
+                return false; 
+            }
+        }
+        return true;
+    }
+    
+    private void BuscarEndereco()
+    {
+        try 
+        {
+            Endereco.setLogradouro(null);
+            Endereco = Model_Endereco.BuscarEndereco(txtCEP.getText().replace("-", ""));
+            if (Endereco.getLogradouro()!=null)
+            {
+                txtCEP.setText(Endereco.getCep());
+                txtRua.setText(Endereco.getLogradouro());
+                cbCidade.addItem(Endereco.getCidade());
+                cbUF.addItem(Endereco.getUf());
+            }
+            
+       
+        } 
+        catch (Exception e) 
+        {
+
+        }
+        
+    }
+
 }
+
+
+

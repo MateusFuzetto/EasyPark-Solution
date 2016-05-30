@@ -4,7 +4,7 @@ package Controller;
 
 public class Ctrl_Pessoa {
     
-        private String Cod;
+        private String Id;
         private String Cpf;
         private String Celular;
         private String Fixo;        
@@ -13,8 +13,8 @@ public class Ctrl_Pessoa {
         private String Cep;
         private String Numero;
 
-    public String getCod() {
-        return Cod;
+    public String getId() {
+        return Id;
     }
 
     public String getCpf() {
@@ -45,8 +45,8 @@ public class Ctrl_Pessoa {
         return Numero;
     }
 
-    public void setCod(String Cod) {
-        this.Cod = Cod;
+    public void setId(String Id) {
+        this.Id = Id;
     }
 
     public void setCpf(String Cpf) {

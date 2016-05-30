@@ -699,7 +699,7 @@ public class View_CadAutorizados extends javax.swing.JFrame {
     private void Atribuir(boolean Vai)
     {
         if (Vai==true) {
-            Autorizado.setCod(txtCod.getText());
+            Autorizado.setId(txtCod.getText());
             Autorizado.setCnh(txtCNH.getText());
             Autorizado.setCpf(txtCPF.getText());
             Autorizado.setCelular(txtCelular.getText());
@@ -711,7 +711,7 @@ public class View_CadAutorizados extends javax.swing.JFrame {
         }
         else
         {
-            txtCod.setText(Autorizado.getCod());
+            txtCod.setText(Autorizado.getId());
             txtCNH.setText(Autorizado.getCnh());
             txtCPF.setText(Autorizado.getCpf());
             txtCelular.setText(Autorizado.getCelular());
