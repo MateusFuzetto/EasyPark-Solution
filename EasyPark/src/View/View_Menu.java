@@ -11,9 +11,8 @@ public class View_Menu extends javax.swing.JFrame {
     public View_Menu() {
         this.setExtendedState(MAXIMIZED_BOTH);
         Model_Banco.Open();
-        double largura = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-        double altura = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-        //JOptionPane.showMessageDialog(null, "Altura: " + altura + "\nLargura: " + largura);
+        
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("entrar.png"));
         initComponents();
     }
 
@@ -54,13 +53,14 @@ public class View_Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu EasyPark");
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         mbMenu.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
 
         mnCadastros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easycad.png"))); // NOI18N
         mnCadastros.setMnemonic('c');
         mnCadastros.setText("Cadastros");
+        mnCadastros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         mnCadastros.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
 
         mniCadCliente.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
@@ -228,6 +228,17 @@ public class View_Menu extends javax.swing.JFrame {
         mbMenu.add(mnSair);
 
         setJMenuBar(mbMenu);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 273, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
