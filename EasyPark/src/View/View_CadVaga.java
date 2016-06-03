@@ -5,14 +5,10 @@
  */
 package View;
 
-
-import Controller.Ctrl_Cliente;
 import Controller.Ctrl_Endereco;
 import Controller.Ctrl_Msg;
-import Controller.Ctrl_Pessoa;
 import Controller.Ctrl_Vaga;
 import Model.Model_Banco;
-import Model.Model_Endereco;
 import Model.Model_Vaga;
 import javax.swing.JSpinner;
 import javax.swing.text.DefaultFormatter;

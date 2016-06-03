@@ -2,8 +2,10 @@
 package Model;
 
 import Controller.Ctrl_Vaga;
+import java.awt.List;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Model_Vaga {
      public static String sqlString=""; 
@@ -50,29 +52,29 @@ public class Model_Vaga {
         return Model_Banco.Deletar(sqlString);
     }    
     
-    public static Ctrl_Vaga  Verificar(String Cpf)
-    {
-       Ctrl_Vaga Vaga = new Ctrl_Vaga();
+    public static java.util.List<Ctrl_Vaga>  BuscarVagas(){
+    
+        ArrayList<Ctrl_Vaga> Vagas = new ArrayList<Ctrl_Vaga>();
         ResultSet rs = null;
-        String sqlString ="select * from PESSOA where (CPF='" + Cpf + "')";
+       
+        Ctrl_Vaga nhs = new Ctrl_Vaga();
+        
+        String sqlString ="SELECT LOCALIZACAO, STATUS FROM VAGA";
         try 
         {
             rs = Model_Banco.BuscaRegistro(sqlString);
-            if (rs.next()) 
+            while (rs.next()) 
             {
-                //  ID, ID_TIPO, PRECO, LOCALIZACAO, STATUS, DESCRICAO
-                Vaga.setId(rs.getString(1));
-                Vaga.setIdTipo(rs.getString(2));
-                Vaga.setPreco(rs.getString(3));
-                Vaga.setLocalizacao(rs.getString(4));
-                Vaga.setStatus(rs.getString(5));
-                Vaga.setDescricao(rs.getString(6));
+                Ctrl_Vaga Vaga = new Ctrl_Vaga();
+                Vaga.setLocalizacao(rs.getString(1));
+                Vaga.setStatus(rs.getString(2));
+                Vagas.add(Vaga);
             }
         } 
         catch (Exception e) 
         {
             return null;
         }
-        return Vaga;
+        return Vagas;
     }
 }
