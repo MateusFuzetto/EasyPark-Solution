@@ -139,9 +139,9 @@ public class View_Venda extends javax.swing.JFrame {
         cbVagas = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1150, 380));
-        setMinimumSize(new java.awt.Dimension(1150, 380));
-        setPreferredSize(new java.awt.Dimension(1100, 350));
+        setMaximumSize(new java.awt.Dimension(1150, 450));
+        setMinimumSize(new java.awt.Dimension(1150, 450));
+        setPreferredSize(new java.awt.Dimension(1150, 450));
 
         jScrollPane02.setVisible(false);
         jScrollPane02.setBackground(new java.awt.Color(255, 255, 255));
