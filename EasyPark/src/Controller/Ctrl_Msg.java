@@ -7,11 +7,11 @@ public class Ctrl_Msg {
     public static String MsgQuestiona = "EasyPark Questiona:";
     public static String MsgInforma = "EasyPark Informa:";
     public static String MsgQLimpar = "Deseja limpar todos os campos?  "; 
-    public static String MsgNaoFazer = "Não há fazer.  ";  
-    public static String MsgQFechar = "Deseja fehar esta instancia ? "; 
-    public static String MsgQFecharS = "Deseja fehar o sistema ? "; 
+    public static String MsgNaoFazer = "Não há nada a fazer.  ";  
+    public static String MsgQFechar = "Deseja realmente sair? "; 
+    public static String MsgQFecharS = "Deseja fechar o sistema ? "; 
     public static String MsgQSalvar = "Deseja salvar esse registro ?";
-    public static String MsgQDeletar = "Deseja deletar esse registro ?";
+    public static String MsgQDeletar = "Deseja excluir esse registro ?";
     public static String MsgQEditar = "Deseja editar esse registro ?";
     public static String MsgIDeledado = "Registro deletado com sucesso.";
     public static String MsgISalvo = "Registro salvo com sucesso.";
@@ -19,6 +19,7 @@ public class Ctrl_Msg {
     public static String MsgIEditado = "Registro alterado com sucesso.";
     public static String MsgErro = "Lamentamos informar, mas não foi possivel completar essta operação :(. Falha na comunicação com o banco de dados. Por favor entre em contato com a equipe de desenvolvimento.";   
     public static String MsgIEdicao = "Para editar ou deletar um registro você deve clicar em 'EDITAR' primeiro.";
+    public static String VagaEmUso = "Lamentamos em informar, mas está vaga já esta em uso. :(";
 
      
     public static boolean  Questiona(String msg){

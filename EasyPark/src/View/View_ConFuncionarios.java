@@ -20,7 +20,10 @@ public class View_ConFuncionarios extends javax.swing.JFrame {
      */
     public View_ConFuncionarios() {
         initComponents();
-        centralizarComponente();
+        this.setLocation(null);
+         Dimension ds = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension dw = getSize();
+        setLocation((ds.width - dw.width) / 2, (ds.height - dw.height) / 2);
     }
 
     /**
@@ -197,12 +200,7 @@ public class View_ConFuncionarios extends javax.swing.JFrame {
         });
     }
     
-    public void centralizarComponente() 
-    {
-        Dimension ds = Toolkit.getDefaultToolkit().getScreenSize();
-        Dimension dw = getSize();
-        setLocation((ds.width - dw.width) / 2, (ds.height - dw.height) / 2);
-    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFechar;

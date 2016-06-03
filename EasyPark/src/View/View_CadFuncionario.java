@@ -4,6 +4,7 @@ import Controller.Ctrl_Endereco;
 import Controller.Ctrl_Funcionario;
 import Controller.Ctrl_Msg;
 import Controller.Ctrl_Pessoa;
+import Controller.Ctrl_Util;
 import Model.Model_Banco;
 import Model.Model_Endereco;
 import Model.Model_Funcionario;
@@ -21,7 +22,10 @@ public class View_CadFuncionario extends javax.swing.JFrame {
     private static Ctrl_Pessoa Pessoa = new Ctrl_Pessoa();
     public View_CadFuncionario() {
         initComponents();
-        centralizarComponente();
+        Dimension ds = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension dw = getSize();
+        setLocation((ds.width - dw.width) / 2, (ds.height - dw.height) / 2);
+
     }
 
     
@@ -595,9 +599,7 @@ public class View_CadFuncionario extends javax.swing.JFrame {
     }
     public void centralizarComponente() 
     {
-        Dimension ds = Toolkit.getDefaultToolkit().getScreenSize();
-        Dimension dw = getSize();
-        setLocation((ds.width - dw.width) / 2, (ds.height - dw.height) / 2);
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
