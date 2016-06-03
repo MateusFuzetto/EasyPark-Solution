@@ -25,14 +25,15 @@ public class Model_Pessoa {
     {
         
         sqlString ="INSERT INTO PESSOA"+
-                "(CPF, NOME, TELEFONE, CELULAR, EMAIL, NUMERO, CEP) VALUES('"
+                "(CPF, NOME, TELEFONE, CELULAR, EMAIL, NUMERO, CEP, TIPO) VALUES('"
                 +Pessoa.getCpf()+"','"
                 +Pessoa.getNome()+"','"
                 +Pessoa.getFixo()+"','"
                 +Pessoa.getCelular()+"','"
                 +Pessoa.getEmail()+"',"
                 +Pessoa.getNumero()+",'"
-                +Pessoa.getCep()+"')";
+                +Pessoa.getCep()+"','"
+                +Pessoa.getTipo()+"')";
         
         boolean r = Model_Banco.Salvar(sqlString);
         String  CodAtualPessoa=null;

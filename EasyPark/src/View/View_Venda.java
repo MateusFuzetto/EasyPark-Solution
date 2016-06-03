@@ -137,6 +137,8 @@ public class View_Venda extends javax.swing.JFrame {
         txtCod = new javax.swing.JTextField();
         lblCod = new javax.swing.JLabel();
         cbVagas = new javax.swing.JComboBox<>();
+        btnFechar = new javax.swing.JButton();
+        btnLimpar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1150, 450));
@@ -159,7 +161,7 @@ public class View_Venda extends javax.swing.JFrame {
         jPanel02.setLayout(jPanel02Layout);
         jPanel02Layout.setHorizontalGroup(
             jPanel02Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1072, Short.MAX_VALUE)
+            .addGap(0, 987, Short.MAX_VALUE)
         );
         jPanel02Layout.setVerticalGroup(
             jPanel02Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,27 +337,53 @@ public class View_Venda extends javax.swing.JFrame {
         lblCod.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         lblCod.setText("Cód:");
 
+        btnFechar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        btnFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyfechar.png"))); // NOI18N
+        btnFechar.setText("Fechar");
+        btnFechar.setToolTipText("Clique aqui para fechar");
+        btnFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFecharActionPerformed(evt);
+            }
+        });
+
+        btnLimpar1.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        btnLimpar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easylimpar.png"))); // NOI18N
+        btnLimpar1.setText("Limpar");
+        btnLimpar1.setToolTipText("Clique aqui para limpar os campos");
+        btnLimpar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpar1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblCod)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(868, 868, 868)
-                        .addComponent(cbVagas, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap(35, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(768, 768, 768)
+                                .addComponent(btnProximo, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnLimpar1)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnFechar)))
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 815, Short.MAX_VALUE)
-                            .addComponent(btnProximo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane01, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane02, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lblCod)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 783, Short.MAX_VALUE)
+                            .addComponent(cbVagas, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane01, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane02, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,14 +393,18 @@ public class View_Venda extends javax.swing.JFrame {
                     .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCod)
                     .addComponent(cbVagas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane01, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane01, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane02, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnProximo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnFechar)
+                    .addComponent(btnLimpar1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -415,13 +447,34 @@ public class View_Venda extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnProximoActionPerformed
 
+    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
+
+        boolean r =  Ctrl_Msg.Questiona(Ctrl_Msg.MsgQFechar);
+        if (r==true)
+        {
+            this.dispose();
+
+        }
+
+    }//GEN-LAST:event_btnFecharActionPerformed
+
+    private void btnLimpar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpar1ActionPerformed
+
+        boolean r =  Ctrl_Msg.Questiona(Ctrl_Msg.MsgQLimpar);
+        if (r==true)
+        {
+            Limpar();
+        }
+
+    }//GEN-LAST:event_btnLimpar1ActionPerformed
+
     private void setLocalizacaoVaga(java.awt.event.MouseEvent evt) {   
 
         cbVagas.setSelectedIndex(indiceCombo);
     }
     
     private void VagaEmUso(){
-        Ctrl_Msg.Informa(Ctrl_Msg.VagaEmUso);
+        Ctrl_Msg.Informa(Ctrl_Msg.MsgVagaEmUso);
     }
 
     /**
@@ -460,6 +513,8 @@ public class View_Venda extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFechar;
+    private javax.swing.JButton btnLimpar1;
     private javax.swing.JButton btnProximo;
     private javax.swing.JButton btnResponsavel;
     private javax.swing.JButton btnVoltar;
@@ -481,4 +536,8 @@ public class View_Venda extends javax.swing.JFrame {
     private javax.swing.JLabel txtPlaca;
     private javax.swing.JLabel txtResponsavel;
     // End of variables declaration//GEN-END:variables
+
+    private void Limpar() {
+      
+    }
 }

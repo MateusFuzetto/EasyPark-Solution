@@ -25,6 +25,7 @@ public class Model_Cliente {
         Pessoa.setEmail(Cliente.getEmail());
         Pessoa.setCep(Cliente.getCep());
         Pessoa.setNumero(Cliente.getNumero());
+        Pessoa.setTipo(Cliente.getTipo());
         
         Cliente.setIdPessoa(Model_Pessoa.Salvar(Pessoa,"PESSOA"));
       
@@ -82,4 +83,32 @@ public class Model_Cliente {
         
         return Cliente;
     }
+    
+     public static Ctrl_Cliente  BuscaCnh(String Id_Pessoa)
+    {
+        Ctrl_Cliente Cliente = new Ctrl_Cliente();
+
+        try 
+        {
+           String sqlString ="SELECT CNH,ID FROM CLIENTE WHERE (ID_PESSOA="+Id_Pessoa+")";
+           rs = Model_Banco.BuscaRegistro(sqlString);
+           if (rs.next()) {   
+                Cliente.setCnh(rs.getString(1));
+                Cliente.setId(rs.getString(2));
+    
+           }
+           
+           
+        } 
+        catch (Exception e)
+        {
+             Cliente.setId("false");
+             return Cliente;
+        }
+        
+        
+        return Cliente;
+    }
+    
+    
 }

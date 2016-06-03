@@ -19,7 +19,8 @@ public class Ctrl_Msg {
     public static String MsgIEditado = "Registro alterado com sucesso.";
     public static String MsgErro = "Lamentamos informar, mas não foi possivel completar essta operação :(. Falha na comunicação com o banco de dados. Por favor entre em contato com a equipe de desenvolvimento.";   
     public static String MsgIEdicao = "Para editar ou deletar um registro você deve clicar em 'EDITAR' primeiro.";
-    public static String VagaEmUso = "Lamentamos em informar, mas está vaga já esta em uso. :(";
+    public static String MsgVagaEmUso = "Lamentamos em informar, mas está vaga já esta em uso. :(";
+    public static String MsgJaExiste = "Este registro já existe.";
 
      
     public static boolean  Questiona(String msg){
@@ -59,72 +60,6 @@ public class Ctrl_Msg {
             botoes[0]
         );
       
-        
-    /*  
-    if (EstaEditando==true) {
-            boolean r =  Ctrl_Msg.Questiona(Ctrl_Msg.MsgQExcluir);
-            if (r==true) {
-               
-            }
-       }
-    private static Ctrl_Estacionamento Estacionamento = new Ctrl_Estacionamento();
-    private void Atribuir (boolean Vai)
-    {
-        if (Vai == true)
-        {
-          Estacionamento.setCod(txtCod.getText());
-          Estacionamento.setNome(txtNome.getText());
-          Estacionamento.setCep(txtCEP.getText());
-          Estacionamento.setNumero(String.valueOf(nmrNumero.getValue()));
-        }
-        else
-        {
-          txtCod.setText(Estacionamento.getCod());
-          txtNome.setText(Estacionamento.getNome());
-          txtCEP.setText(Estacionamento.getCep());
-          nmrNumero.setValue(Integer.parseInt(Estacionamento.getNumero()));
-        
-        }
-
-    }
-        
-         private void Limpar (){   
-     txtCod.setText("");
-     txtNome.setText("");
-     nmrNumero.setValue(0);
-     txtCEP.setText("");
-     txtCNPJ.setText("");
-     txtRua.setText("");        
-    }
-    
-   private void Bloquear (boolean Sim)
-   {
-       if (Sim==true) 
-       {     
-          txtCod.setEnabled(true);
-          txtCod.setEditable(true);
-          txtNome.setEnabled(false);
-          nmrNumero.setEnabled(false);
-          txtCEP.setEnabled(false);
-          txtCNPJ.setEnabled(false);
-          txtRua.setEnabled(false);  
-          cbUF.setEnabled(false); 
-          cbCidade.setEnabled(false);          
-       }
-       else
-       {
-          txtCod.setEnabled(true);
-          txtCod.setEditable(true);
-          txtCod.setEnabled(true);
-          txtNome.setEnabled(true);
-          nmrNumero.setEnabled(true);
-          txtCEP.setEnabled(true);
-          txtCNPJ.setEnabled(true);
-          txtRua.setEnabled(true);  
-          cbUF.setEnabled(true); 
-          cbCidade.setEnabled(true);  
-       }
-*/
     }
 }
 

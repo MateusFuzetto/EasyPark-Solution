@@ -566,7 +566,6 @@
           <Image iconType="3" name="/View/img/car.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Veiculos"/>
-        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
@@ -584,7 +583,6 @@
           <Image iconType="3" name="/View/img/autorizado.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Autorizados"/>
-        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddAutorizadosActionPerformed"/>
