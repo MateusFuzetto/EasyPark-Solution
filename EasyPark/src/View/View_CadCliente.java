@@ -10,6 +10,7 @@ import Model.Model_Banco;
 import Model.Model_Cliente;
 import Model.Model_Pessoa;
 import Controller.Ctrl_Endereco;
+import Controller.Ctrl_Util;
 import Model.Model_Endereco;
 import javax.swing.JSpinner;
 import javax.swing.text.DefaultFormatter;
@@ -373,7 +374,6 @@ public class View_CadCliente extends javax.swing.JFrame {
         btnAddVeiculos.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         btnAddVeiculos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/car.png"))); // NOI18N
         btnAddVeiculos.setText("Veiculos");
-        btnAddVeiculos.setEnabled(false);
         btnAddVeiculos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddVeiculosActionPerformed(evt);
@@ -383,7 +383,6 @@ public class View_CadCliente extends javax.swing.JFrame {
         btnAddAutorizados.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         btnAddAutorizados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/autorizado.png"))); // NOI18N
         btnAddAutorizados.setText("Autorizados");
-        btnAddAutorizados.setEnabled(false);
         btnAddAutorizados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddAutorizadosActionPerformed(evt);
@@ -498,6 +497,7 @@ public class View_CadCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddAutorizadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAutorizadosActionPerformed
+        Ctrl_Util.IdCliente = txtCod.getText();
         View_CadAutorizados frmCadAutorizados = new View_CadAutorizados();
         frmCadAutorizados.setVisible(true);
     }//GEN-LAST:event_btnAddAutorizadosActionPerformed
@@ -512,17 +512,15 @@ public class View_CadCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCodActionPerformed
 
     private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
-        boolean r = Verifica();
-        if (r==true)
-        {
-           r =false;
-           r =  Ctrl_Msg.Questiona(Ctrl_Msg.MsgQEditar);
+
+          
+           boolean  r =  Ctrl_Msg.Questiona(Ctrl_Msg.MsgQEditar);
            if (r==true) 
            {
                Bloqueia(false);
                EstaEditando=true;
            }
-        }   
+         
     }//GEN-LAST:event_btnEditar1ActionPerformed
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
@@ -614,6 +612,17 @@ public class View_CadCliente extends javax.swing.JFrame {
             txtEmail.setText(Pessoa.getEmail());
             nmrNumero.setValue(Integer.parseInt(Pessoa.getNumero()));
             txtCEP.setText(Pessoa.getCep());
+            Ctrl_Cliente IdCnh = Model.Model_Cliente.BuscaCnh(Pessoa.getId());
+            if (IdCnh.getId().equals("false")) {
+                
+            }
+            else{
+             txtCNH.setText(IdCnh.getCnh());
+             txtCod.setText(IdCnh.getId());
+             Ctrl_Msg.Informa(Ctrl_Msg.MsgJaExiste);
+             Bloqueia(true);
+            }
+            
             BuscarEndereco();
         }
     }//GEN-LAST:event_txtCPFFocusLost
@@ -754,6 +763,7 @@ public class View_CadCliente extends javax.swing.JFrame {
             Cliente.setEmail(txtEmail.getText());
             Cliente.setCep(txtCEP.getText());
             Cliente.setNumero(String.valueOf(nmrNumero.getValue()));
+            Cliente.setTipo("C");
         }
         else
         {

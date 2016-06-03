@@ -12,6 +12,7 @@ public class Ctrl_Pessoa {
         private String Email;
         private String Cep;
         private String Numero;
+        private String Tipo;
 
     public String getId() {
         return Id;
@@ -75,6 +76,14 @@ public class Ctrl_Pessoa {
 
     public void setNumero(String Numero) {
         this.Numero = Numero;
+    }
+
+    public String getTipo() {
+        return Tipo;
+    }
+
+    public void setTipo(String Tipo) {
+        this.Tipo = Tipo;
     }
     
 }
