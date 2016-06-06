@@ -6,6 +6,7 @@ public class Ctrl_Autorizado extends Ctrl_Pessoa {
     
     private String Cnh;
     private String IdPessoa;
+    private String IdAutorizado;
 
     public String getCnh() {
         return Cnh;
@@ -21,6 +22,14 @@ public class Ctrl_Autorizado extends Ctrl_Pessoa {
 
     public void setIdPessoa(String IdPessoa) {
         this.IdPessoa = IdPessoa;
+    }
+
+    public String getIdAutorizado() {
+        return IdAutorizado;
+    }
+
+    public void setIdAutorizado(String IdAutorizado) {
+        this.IdAutorizado = IdAutorizado;
     }
         
 

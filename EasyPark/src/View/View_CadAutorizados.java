@@ -4,12 +4,17 @@ import Controller.Ctrl_Autorizado;
 import Controller.Ctrl_Endereco;
 import Controller.Ctrl_Msg;
 import Controller.Ctrl_Pessoa;
+import Controller.Ctrl_Util;
 import Model.Model_Autorizado;
 import Model.Model_Banco;
 import Model.Model_Endereco;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
 import javax.swing.JSpinner;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.DefaultFormatter;
 import javax.swing.text.MaskFormatter;
 
@@ -23,6 +28,7 @@ public class View_CadAutorizados extends javax.swing.JFrame {
     public View_CadAutorizados() {
         initComponents();
         centralizarComponente();
+        PopularTabela();
     }
 
     /**
@@ -60,15 +66,14 @@ public class View_CadAutorizados extends javax.swing.JFrame {
         txtCEP = new javax.swing.JFormattedTextField();
         cbUF = new javax.swing.JComboBox<>();
         lblUF = new javax.swing.JLabel();
-        btnPesqCod = new javax.swing.JButton();
-        btnEditar1 = new javax.swing.JButton();
-        btnSalvar1 = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
         btnDeletar1 = new javax.swing.JButton();
-        btnLimpar1 = new javax.swing.JButton();
+        btnLimpar = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
         txtCod = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbAutorizados = new javax.swing.JTable();
 
         btnDeletar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         btnDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyexcluir.png"))); // NOI18N
@@ -77,6 +82,7 @@ public class View_CadAutorizados extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Autorizados");
+        setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         setResizable(false);
         setSize(new java.awt.Dimension(723, 400));
 
@@ -280,17 +286,17 @@ public class View_CadAutorizados extends javax.swing.JFrame {
             .addGroup(pnlEnderecoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCEP)
+                    .addComponent(lblRua))
+                .addGap(18, 18, 18)
+                .addGroup(pnlEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlEnderecoLayout.createSequentialGroup()
-                        .addComponent(lblRua)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblNumero)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nmrNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlEnderecoLayout.createSequentialGroup()
-                        .addComponent(lblCEP)
-                        .addGap(18, 18, 18)
                         .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)
                         .addComponent(lblUF)
@@ -300,7 +306,7 @@ public class View_CadAutorizados extends javax.swing.JFrame {
                         .addComponent(lblCidade)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 5, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         pnlEnderecoLayout.setVerticalGroup(
             pnlEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,54 +327,30 @@ public class View_CadAutorizados extends javax.swing.JFrame {
                     .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNumero)
                     .addComponent(nmrNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         JSpinner.NumberEditor jsEditor = (javax.swing.JSpinner.NumberEditor)nmrNumero.getEditor();
         DefaultFormatter formatter = (DefaultFormatter) jsEditor.getTextField().getFormatter();
         formatter.setAllowsInvalid(false);
 
-        btnPesqCod.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
-        btnPesqCod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easypesq.png"))); // NOI18N
-        btnPesqCod.setToolTipText("");
-        btnPesqCod.setBorderPainted(false
-        );
-        btnPesqCod.setContentAreaFilled(false);
-        btnPesqCod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnPesqCod.setDefaultCapable(false);
-        btnPesqCod.setFocusPainted(false);
-        btnPesqCod.setFocusable(false);
-        btnPesqCod.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        btnPesqCod.setMaximumSize(new java.awt.Dimension(38, 44));
-        btnPesqCod.setMinimumSize(null);
-        btnPesqCod.setPreferredSize(new java.awt.Dimension(38, 44));
-        btnPesqCod.setVerifyInputWhenFocusTarget(false);
-        btnPesqCod.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnPesqCodMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnPesqCodMouseExited(evt);
+        btnEditar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyeditar.png"))); // NOI18N
+        btnEditar.setText("Editar");
+        btnEditar.setToolTipText("Clique aqui para editar os campos");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
             }
         });
 
-        btnEditar1.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
-        btnEditar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyeditar.png"))); // NOI18N
-        btnEditar1.setText("Editar");
-        btnEditar1.setToolTipText("Clique aqui para editar os campos");
-        btnEditar1.addActionListener(new java.awt.event.ActionListener() {
+        btnSalvar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easysave.png"))); // NOI18N
+        btnSalvar.setText("Salvar");
+        btnSalvar.setToolTipText("Clique aqui para salvar os campos");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditar1ActionPerformed(evt);
-            }
-        });
-
-        btnSalvar1.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
-        btnSalvar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easysave.png"))); // NOI18N
-        btnSalvar1.setText("Salvar");
-        btnSalvar1.setToolTipText("Clique aqui para salvar os campos");
-        btnSalvar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvar1ActionPerformed(evt);
+                btnSalvarActionPerformed(evt);
             }
         });
 
@@ -382,13 +364,13 @@ public class View_CadAutorizados extends javax.swing.JFrame {
             }
         });
 
-        btnLimpar1.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
-        btnLimpar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easylimpar.png"))); // NOI18N
-        btnLimpar1.setText("Limpar");
-        btnLimpar1.setToolTipText("Clique aqui para limpar os campos");
-        btnLimpar1.addActionListener(new java.awt.event.ActionListener() {
+        btnLimpar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easylimpar.png"))); // NOI18N
+        btnLimpar.setText("Limpar");
+        btnLimpar.setToolTipText("Clique aqui para limpar os campos");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpar1ActionPerformed(evt);
+                btnLimparActionPerformed(evt);
             }
         });
 
@@ -401,13 +383,6 @@ public class View_CadAutorizados extends javax.swing.JFrame {
                 btnFecharActionPerformed(evt);
             }
         });
-
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = {};
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
 
         try {
             txtCod.setText(Model_Banco.BuscaCodigoNovo("AUTORIZADO"));
@@ -422,38 +397,48 @@ public class View_CadAutorizados extends javax.swing.JFrame {
             }
         });
 
+        DefaultTableModel model = (DefaultTableModel) tbAutorizados.getModel();
+        for (int i = 0; i < 10; i++) {
+            Object[] linha = {i, ++i};
+            model.addRow(linha);
+        }
+        tbAutorizados.setModel(model);
+
+        tbAutorizados.setModel(new javax.swing.table.DefaultTableModel(
+            new String [][] {},
+            new String [] {
+                "ID", "Nome"
+            }
+        ));
+        jScrollPane2.setViewportView(tbAutorizados);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btnSalvar)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnEditar)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnDeletar1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnLimpar)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnFechar))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(lblCod)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnPesqCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pnlDadosPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnlEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnEditar1)
+                            .addComponent(pnlDadosPessoais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnlEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblCod)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSalvar1)
+                        .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDeletar1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLimpar1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnFechar)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -461,42 +446,27 @@ public class View_CadAutorizados extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(pnlDadosPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(13, 13, 13)
-                        .addComponent(pnlEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnEditar1)
-                            .addComponent(btnSalvar1)
-                            .addComponent(btnDeletar1)
-                            .addComponent(btnLimpar1)
-                            .addComponent(btnFechar)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnPesqCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblCod)
-                                    .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCod))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlDadosPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(pnlEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEditar)
+                    .addComponent(btnSalvar)
+                    .addComponent(btnDeletar1)
+                    .addComponent(btnLimpar)
+                    .addComponent(btnFechar))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnPesqCodMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPesqCodMouseEntered
-
-    }//GEN-LAST:event_btnPesqCodMouseEntered
-
-    private void btnPesqCodMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPesqCodMouseExited
-
-    }//GEN-LAST:event_btnPesqCodMouseExited
-
-    private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         boolean r = Verifica();
         if (r==true)
         {
@@ -506,11 +476,12 @@ public class View_CadAutorizados extends javax.swing.JFrame {
             {
                 Bloqueia(false);
                 EstaEditando=true;
+                btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/atualizar.png")));
             }
         }
-    }//GEN-LAST:event_btnEditar1ActionPerformed
+    }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void btnSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvar1ActionPerformed
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
 
         boolean r =  Verifica();
         if (r==true)
@@ -523,10 +494,16 @@ public class View_CadAutorizados extends javax.swing.JFrame {
                 try
                 {
                     Atribuir(true);
-                    String CodNew =  Model_Autorizado.Salvar(Autorizado);
-                    Limpar();
-                    txtCod.setText(CodNew);
-                    Ctrl_Msg.Informa(Ctrl_Msg.MsgISalvo);
+                    if (EstaEditando==true) {
+                       
+                    }
+                    else
+                    {
+                        String CodNew =  Model_Autorizado.Salvar(Autorizado);
+                        Limpar();
+                        txtCod.setText(CodNew);
+                        Ctrl_Msg.Informa(Ctrl_Msg.MsgISalvo);
+                    }
                 }
                 catch (Exception e)
                 {
@@ -535,7 +512,7 @@ public class View_CadAutorizados extends javax.swing.JFrame {
             }
 
         }
-    }//GEN-LAST:event_btnSalvar1ActionPerformed
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnDeletar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletar1ActionPerformed
         
@@ -552,7 +529,7 @@ public class View_CadAutorizados extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDeletar1ActionPerformed
 
-    private void btnLimpar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpar1ActionPerformed
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
 
         boolean r =  Ctrl_Msg.Questiona(Ctrl_Msg.MsgQLimpar);
         if (r==true)
@@ -561,7 +538,7 @@ public class View_CadAutorizados extends javax.swing.JFrame {
             
         }
 
-    }//GEN-LAST:event_btnLimpar1ActionPerformed
+    }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
 
@@ -621,15 +598,13 @@ public class View_CadAutorizados extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnDeletar1;
-    private javax.swing.JButton btnEditar1;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnFechar;
-    private javax.swing.JButton btnLimpar1;
-    private javax.swing.JButton btnPesqCod;
-    private javax.swing.JButton btnSalvar1;
+    private javax.swing.JButton btnLimpar;
+    private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> cbCidade;
     private javax.swing.JComboBox<String> cbUF;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblCEP;
     private javax.swing.JLabel lblCNH;
     private javax.swing.JLabel lblCPF;
@@ -645,6 +620,7 @@ public class View_CadAutorizados extends javax.swing.JFrame {
     private javax.swing.JSpinner nmrNumero;
     private javax.swing.JPanel pnlDadosPessoais;
     private javax.swing.JPanel pnlEndereco;
+    private javax.swing.JTable tbAutorizados;
     private javax.swing.JFormattedTextField txtCEP;
     private javax.swing.JFormattedTextField txtCNH;
     private javax.swing.JFormattedTextField txtCPF;
@@ -779,6 +755,17 @@ public class View_CadAutorizados extends javax.swing.JFrame {
 
         }
         
+    }
+
+    private void PopularTabela() {
+        List<Ctrl_Autorizado> ListaDeAutorizado = Model.Model_Autorizado.Busca(Ctrl_Util.IdCliente);
+        
+        DefaultTableModel model = (DefaultTableModel) tbAutorizados.getModel();
+        for (int i = 0; i < ListaDeAutorizado.size(); i++) {
+            Object[] linha = {ListaDeAutorizado.get(i).getIdAutorizado(),ListaDeAutorizado.get(i).getNome()};
+            model.addRow(linha);
+        }
+        tbAutorizados.setModel(model);
     }
 
 }

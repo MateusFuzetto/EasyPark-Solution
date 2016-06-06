@@ -21,10 +21,12 @@ public class View_CadCliente extends javax.swing.JFrame {
     private static boolean EstaEditando = false;
     private static Ctrl_Endereco Endereco = new Ctrl_Endereco();
     private static Ctrl_Cliente Cliente = new Ctrl_Cliente();
+    private static boolean JaEstaSalvo = false;
     private static Ctrl_Pessoa Pessoa = new Ctrl_Pessoa();
     public View_CadCliente() {
         
         initComponents();
+        CentarlizarTela();
         
     }
 
@@ -46,7 +48,7 @@ public class View_CadCliente extends javax.swing.JFrame {
         txtNome = new javax.swing.JTextField();
         lblEmail = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
-        btnLimpar1 = new javax.swing.JButton();
+        btnLimpar = new javax.swing.JButton();
         pnlEndereco = new javax.swing.JPanel();
         lblRua = new javax.swing.JLabel();
         txtRua = new javax.swing.JTextField();
@@ -58,10 +60,10 @@ public class View_CadCliente extends javax.swing.JFrame {
         txtCEP = new javax.swing.JFormattedTextField();
         cbUF = new javax.swing.JComboBox<>();
         lblUF = new javax.swing.JLabel();
-        btnSalvar1 = new javax.swing.JButton();
-        btnDeletar1 = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
+        btnDeletar = new javax.swing.JButton();
         txtCod = new javax.swing.JTextField();
-        btnEditar1 = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
         btnAddVeiculos = new javax.swing.JButton();
         btnAddAutorizados = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
@@ -69,6 +71,7 @@ public class View_CadCliente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Clientes");
+        setModalExclusionType(java.awt.Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);
         setResizable(false);
 
         lblCod.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
@@ -215,13 +218,13 @@ public class View_CadCliente extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        btnLimpar1.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
-        btnLimpar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easylimpar.png"))); // NOI18N
-        btnLimpar1.setText("Limpar");
-        btnLimpar1.setToolTipText("Clique aqui para limpar os campos");
-        btnLimpar1.addActionListener(new java.awt.event.ActionListener() {
+        btnLimpar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easylimpar.png"))); // NOI18N
+        btnLimpar.setText("Limpar");
+        btnLimpar.setToolTipText("Clique aqui para limpar os campos");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpar1ActionPerformed(evt);
+                btnLimparActionPerformed(evt);
             }
         });
 
@@ -329,23 +332,23 @@ public class View_CadCliente extends javax.swing.JFrame {
         DefaultFormatter formatter = (DefaultFormatter) jsEditor.getTextField().getFormatter();
         formatter.setAllowsInvalid(false);
 
-        btnSalvar1.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
-        btnSalvar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easysave.png"))); // NOI18N
-        btnSalvar1.setText("Salvar");
-        btnSalvar1.setToolTipText("Clique aqui para salvar os campos");
-        btnSalvar1.addActionListener(new java.awt.event.ActionListener() {
+        btnSalvar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easysave.png"))); // NOI18N
+        btnSalvar.setText("Salvar");
+        btnSalvar.setToolTipText("Clique aqui para salvar os campos");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvar1ActionPerformed(evt);
+                btnSalvarActionPerformed(evt);
             }
         });
 
-        btnDeletar1.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
-        btnDeletar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyexcluir.png"))); // NOI18N
-        btnDeletar1.setText("Excluir");
-        btnDeletar1.setToolTipText("Clique aqui para excluir o registro");
-        btnDeletar1.addActionListener(new java.awt.event.ActionListener() {
+        btnDeletar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        btnDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyexcluir.png"))); // NOI18N
+        btnDeletar.setText("Excluir");
+        btnDeletar.setToolTipText("Clique aqui para excluir o registro");
+        btnDeletar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeletar1ActionPerformed(evt);
+                btnDeletarActionPerformed(evt);
             }
         });
 
@@ -355,19 +358,24 @@ public class View_CadCliente extends javax.swing.JFrame {
         }
         txtCod.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         txtCod.setEnabled(false);
+        txtCod.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCodFocusLost(evt);
+            }
+        });
         txtCod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodActionPerformed(evt);
             }
         });
 
-        btnEditar1.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
-        btnEditar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyeditar.png"))); // NOI18N
-        btnEditar1.setText("Editar");
-        btnEditar1.setToolTipText("Clique aqui para editar os campos");
-        btnEditar1.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easyeditar.png"))); // NOI18N
+        btnEditar.setText("Editar");
+        btnEditar.setToolTipText("Clique aqui para editar os campos");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditar1ActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
 
@@ -445,13 +453,13 @@ public class View_CadCliente extends javax.swing.JFrame {
                                 .addComponent(btnAddAutorizados, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(274, 274, 274)
-                                .addComponent(btnEditar1)))
+                                .addComponent(btnEditar)))
                         .addGap(5, 5, 5)
-                        .addComponent(btnSalvar1)
+                        .addComponent(btnSalvar)
                         .addGap(5, 5, 5)
-                        .addComponent(btnDeletar1)
+                        .addComponent(btnDeletar)
                         .addGap(5, 5, 5)
-                        .addComponent(btnLimpar1)
+                        .addComponent(btnLimpar)
                         .addGap(5, 5, 5)
                         .addComponent(btnFechar)))
                 .addGap(0, 11, Short.MAX_VALUE))
@@ -483,10 +491,10 @@ public class View_CadCliente extends javax.swing.JFrame {
                     .addComponent(btnAddAutorizados, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEditar1)
-                    .addComponent(btnSalvar1)
-                    .addComponent(btnDeletar1)
-                    .addComponent(btnLimpar1)
+                    .addComponent(btnEditar)
+                    .addComponent(btnSalvar)
+                    .addComponent(btnDeletar)
+                    .addComponent(btnLimpar)
                     .addComponent(btnFechar))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
@@ -497,21 +505,81 @@ public class View_CadCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddAutorizadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAutorizadosActionPerformed
-        Ctrl_Util.IdCliente = txtCod.getText();
-        View_CadAutorizados frmCadAutorizados = new View_CadAutorizados();
-        frmCadAutorizados.setVisible(true);
+        if (JaEstaSalvo==false) {
+             boolean r =  Verifica();
+        if (r==true) 
+        {
+            r = false;
+            r = Ctrl_Msg.Questiona(Ctrl_Msg.MsgQSalvar);
+            if (r==true) 
+            {
+             
+                try 
+                {   
+                    Atribuir(true);
+                    String CodNew =  Model_Cliente.Salvar(Cliente);
+                    Bloqueia(true);
+                    Ctrl_Msg.Informa(Ctrl_Msg.MsgISalvo);
+                    JaEstaSalvo=true;
+                } 
+                catch (Exception e) 
+                {
+                    Ctrl_Msg.Informa(Ctrl_Msg.MsgErro);
+                }
+            }
+          
+          } 
+        }
+        if (JaEstaSalvo==true) {
+            Ctrl_Util.IdCliente = txtCod.getText();
+            View_CadAutorizados frmCadAutorizados = new View_CadAutorizados();
+            frmCadAutorizados.setVisible(true);
+        }
+        else{
+            Ctrl_Msg.Informa(Ctrl_Msg.MsgSelecioneCliente);
+        }
     }//GEN-LAST:event_btnAddAutorizadosActionPerformed
 
     private void btnAddVeiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddVeiculosActionPerformed
-        View_CadVeiculo frmCadVeiculo = new View_CadVeiculo();
-        frmCadVeiculo.setVisible(true);
+        if (JaEstaSalvo==false) {
+            boolean r =  Verifica();
+            if (r==true) 
+            {
+                r = false;
+                r = Ctrl_Msg.Questiona(Ctrl_Msg.MsgQSalvar);
+                if (r==true) 
+                {
+
+                    try 
+                    {   
+                        Atribuir(true);
+                        String CodNew =  Model_Cliente.Salvar(Cliente);
+                        Bloqueia(true);
+                        Ctrl_Msg.Informa(Ctrl_Msg.MsgISalvo);
+                        JaEstaSalvo=true;
+                    } 
+                    catch (Exception e) 
+                    {
+                        Ctrl_Msg.Informa(Ctrl_Msg.MsgErro);
+                    }
+                }
+
+              } 
+        }
+        if (JaEstaSalvo==true) {
+            Ctrl_Util.IdCliente = txtCod.getText();
+            View_CadVeiculo frmCadVeiculo = new View_CadVeiculo();
+            frmCadVeiculo.setVisible(true);
+        }else{
+            Ctrl_Msg.Informa(Ctrl_Msg.MsgSelecioneCliente);
+        }
     }//GEN-LAST:event_btnAddVeiculosActionPerformed
 
     private void txtCodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodActionPerformed
 
     }//GEN-LAST:event_txtCodActionPerformed
 
-    private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
           
            boolean  r =  Ctrl_Msg.Questiona(Ctrl_Msg.MsgQEditar);
@@ -519,9 +587,10 @@ public class View_CadCliente extends javax.swing.JFrame {
            {
                Bloqueia(false);
                EstaEditando=true;
+               btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/atualizar.png")));
            }
          
-    }//GEN-LAST:event_btnEditar1ActionPerformed
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
   
@@ -535,7 +604,7 @@ public class View_CadCliente extends javax.swing.JFrame {
        
     }//GEN-LAST:event_btnFecharActionPerformed
 
-    private void btnLimpar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpar1ActionPerformed
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
       
         boolean r =  Ctrl_Msg.Questiona(Ctrl_Msg.MsgQLimpar);
           if (r==true)
@@ -543,9 +612,9 @@ public class View_CadCliente extends javax.swing.JFrame {
             Limpar();
           }
        
-    }//GEN-LAST:event_btnLimpar1ActionPerformed
+    }//GEN-LAST:event_btnLimparActionPerformed
 
-    private void btnDeletar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletar1ActionPerformed
+    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
         if (EstaEditando==true) 
         {
             boolean r =  Ctrl_Msg.Questiona(Ctrl_Msg.MsgQDeletar);
@@ -557,9 +626,9 @@ public class View_CadCliente extends javax.swing.JFrame {
        {
            Ctrl_Msg.Informa(Ctrl_Msg.MsgIEdicao); 
        }
-    }//GEN-LAST:event_btnDeletar1ActionPerformed
+    }//GEN-LAST:event_btnDeletarActionPerformed
 
-    private void btnSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvar1ActionPerformed
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
          
         boolean r =  Verifica();
         if (r==true) 
@@ -584,7 +653,7 @@ public class View_CadCliente extends javax.swing.JFrame {
             }
           
         }
-    }//GEN-LAST:event_btnSalvar1ActionPerformed
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnPesqCodMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPesqCodMouseEntered
    
@@ -612,20 +681,23 @@ public class View_CadCliente extends javax.swing.JFrame {
             txtEmail.setText(Pessoa.getEmail());
             nmrNumero.setValue(Integer.parseInt(Pessoa.getNumero()));
             txtCEP.setText(Pessoa.getCep());
+            
             Ctrl_Cliente IdCnh = Model.Model_Cliente.BuscaCnh(Pessoa.getId());
-            if (IdCnh.getId().equals("false")) {
-                
-            }
-            else{
+            if (!IdCnh.getId().equals("false")) {          
              txtCNH.setText(IdCnh.getCnh());
              txtCod.setText(IdCnh.getId());
              Ctrl_Msg.Informa(Ctrl_Msg.MsgJaExiste);
              Bloqueia(true);
+             JaEstaSalvo=true;
             }
             
             BuscarEndereco();
         }
     }//GEN-LAST:event_txtCPFFocusLost
+
+    private void txtCodFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCodFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodFocusLost
 
   
     public static void main(String args[]) {
@@ -666,12 +738,12 @@ public class View_CadCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddAutorizados;
     private javax.swing.JButton btnAddVeiculos;
-    private javax.swing.JButton btnDeletar1;
-    private javax.swing.JButton btnEditar1;
+    private javax.swing.JButton btnDeletar;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnFechar;
-    private javax.swing.JButton btnLimpar1;
+    private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnPesqCod;
-    private javax.swing.JButton btnSalvar1;
+    private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> cbCidade;
     private javax.swing.JComboBox<String> cbUF;
     private javax.swing.JLabel lblCEP;
@@ -825,6 +897,14 @@ public class View_CadCliente extends javax.swing.JFrame {
 
         }
         
+    }
+
+    private void CentarlizarTela() {
+    
+        Dimension ds = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension dw = getSize();
+        setLocation((ds.width - dw.width) / 2, (ds.height - dw.height) / 2);
+    
     }
 
 }
