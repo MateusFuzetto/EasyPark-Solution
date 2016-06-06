@@ -108,12 +108,12 @@ public class Model_Autorizado{
         List<Ctrl_Autorizado> ListaAutorizado = new ArrayList<Ctrl_Autorizado>();
         try 
         {
-           sqlString ="SELECT ID_AUTORIZADO FROM CLIENTE_AUTO WHERE (ID_CLIENTE="+Id_Cliente+")";
-           rs = Model_Banco.BuscaRegistro(sqlString);
-           while (rs.next()) {
+            sqlString ="SELECT ID_AUTORIZADO FROM CLIENTE_AUTO WHERE (ID_CLIENTE ="+Id_Cliente+")";
+            rs = Model_Banco.BuscaRegistro(sqlString);
+            while (rs.next()) {
                String x = rs.getString(1);
                ListaIdAutorizado.add(x);  
-           }
+            }
            
             for (int i = 0; i < ListaIdAutorizado.size(); i++) {
                 sqlString ="SELECT ID_PESSOA FROM AUTORIZADO WHERE (ID="+ListaIdAutorizado.get(i)+")";

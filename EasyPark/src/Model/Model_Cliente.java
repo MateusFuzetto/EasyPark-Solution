@@ -1,14 +1,18 @@
 
 package Model;
 
+import Controller.Ctrl_Autorizado;
 import Controller.Ctrl_Cliente;
 import Controller.Ctrl_Pessoa;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Model_Cliente {   
 
     private static ResultSet rs = null;
+    private static String sqlString;
     public static void Atualizar()
     {
         
@@ -30,7 +34,7 @@ public class Model_Cliente {
         Cliente.setIdPessoa(Model_Pessoa.Salvar(Pessoa,"PESSOA"));
       
         
-        String  sqlString = "insert into CLIENTE (CNH, ID_PESSOA) values ('" 
+        sqlString = "insert into CLIENTE (CNH, ID_PESSOA) values ('" 
                 +Cliente.getCnh()+ "','"
                 +Cliente.getIdPessoa()+"')";
         
@@ -59,7 +63,7 @@ public class Model_Cliente {
         Ctrl_Cliente Cliente = new Ctrl_Cliente();
         try 
         {
-           String sqlString ="SELECT * FROM PESSOA WHERE (ID="+Id_Pessoa+")";
+           sqlString ="SELECT * FROM PESSOA WHERE (ID="+Id_Pessoa+")";
            rs = Model_Banco.BuscaRegistro(sqlString);
            if (rs.next()) {   
                 Cliente.setId(rs.getString(1));
@@ -90,7 +94,7 @@ public class Model_Cliente {
 
         try 
         {
-           String sqlString ="SELECT CNH,ID FROM CLIENTE WHERE (ID_PESSOA="+Id_Pessoa+")";
+           sqlString ="SELECT CNH,ID FROM CLIENTE WHERE (ID_PESSOA="+Id_Pessoa+")";
            rs = Model_Banco.BuscaRegistro(sqlString);
            if (rs.next()) {   
                 Cliente.setCnh(rs.getString(1));
@@ -110,5 +114,81 @@ public class Model_Cliente {
         return Cliente;
     }
     
+      public static List<Ctrl_Cliente> Busca(String Key, int Tipo)
+    {
+        List<String> ListaIdCliente = new ArrayList<String>();
+        List<String> ListaIdPessoa = new ArrayList<String>();
+        List<Ctrl_Cliente> ListaCliente = new ArrayList<Ctrl_Cliente>();
+        try 
+        {
+            if (Tipo == 0) {
+                sqlString ="SELECT ID_PESSOA FROM CLIENTE WHERE (ID = "+Key+")";
+                rs = Model_Banco.BuscaRegistro(sqlString);
+                if(rs.next()) {
+                    String x = rs.getString(1);
+                    ListaIdPessoa.add(x);  
+                }
+
+                for (int i = 0; i < ListaIdPessoa.size(); i++) {
+                    sqlString ="SELECT * FROM PESSOA WHERE (ID="+ListaIdPessoa.get(i)+")";
+                    rs = Model_Banco.BuscaRegistro(sqlString);
+
+                    Ctrl_Cliente Cliente = new Ctrl_Cliente();
+
+                    if (rs.next()) {
+                        Cliente.setId(rs.getString(1));
+                        Cliente.setCpf(rs.getString(2));
+                        Cliente.setNome(rs.getString(3));
+                        Cliente.setFixo(rs.getString(4));
+                        Cliente.setCelular(rs.getString(5));
+                        Cliente.setEmail(rs.getString(6));
+                        Cliente.setNumero(rs.getString(7));
+                        Cliente.setCep(rs.getString(8));
+
+                        Cliente.setIdCliente(Key);
+
+                        ListaCliente.add(Cliente);
+                    }
+                }     
+            }
+            
+            if (Tipo==1) {
+                sqlString ="SELECT * FROM PESSOA WHERE (TIPO = 'C') AND (NOME LIKE '"+Key+"%')";
+                rs = Model_Banco.BuscaRegistro(sqlString);
+                
+                while(rs.next()){
+                    Ctrl_Cliente Cliente = new Ctrl_Cliente();
+
+                    Cliente.setId(rs.getString(1));
+                    Cliente.setCpf(rs.getString(2));
+                    Cliente.setNome(rs.getString(3));
+                    Cliente.setFixo(rs.getString(4));
+                    Cliente.setCelular(rs.getString(5));
+                    Cliente.setEmail(rs.getString(6));
+                    Cliente.setNumero(rs.getString(7));
+                    Cliente.setCep(rs.getString(8));
+
+                    ListaCliente.add(Cliente);
+                    
+                }
+
+                for (int i = 0; i < ListaCliente.size(); i++) {
+                    sqlString ="SELECT ID FROM CLIENTE WHERE (ID_PESSOA="+ListaCliente.get(i).getId()+")";
+                    rs = Model_Banco.BuscaRegistro(sqlString);
+                    while (rs.next()) {
+                        ListaCliente.get(i).setIdCliente(rs.getString(1));                        
+                    }                 
+                }                                  
+            }
+      
+        } 
+        catch (Exception e)
+        {
+             return null;
+        }
+        
+        
+        return ListaCliente;
+    }
     
 }
