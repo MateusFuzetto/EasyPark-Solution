@@ -21,6 +21,7 @@ public class Ctrl_Msg {
     public static String MsgIEdicao = "Para editar ou deletar um registro você deve clicar em 'EDITAR' primeiro.";
     public static String MsgVagaEmUso = "Lamentamos em informar, mas está vaga já esta em uso. :(";
     public static String MsgJaExiste = "Este registro já existe.";
+    public static String MsgSelecioneCliente = "Por favor selecione um cliente.";
 
      
     public static boolean  Questiona(String msg){

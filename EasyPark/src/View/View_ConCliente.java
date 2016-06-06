@@ -5,10 +5,21 @@
  */
 package View;
 
+import Controller.Ctrl_Autorizado;
+import Controller.Ctrl_Cliente;
+import Controller.Ctrl_Util;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -34,29 +45,29 @@ public class View_ConCliente extends javax.swing.JFrame {
     private void initComponents() {
 
         groupConCliente = new javax.swing.ButtonGroup();
-        rdbNome = new javax.swing.JRadioButton();
+        rbtNome = new javax.swing.JRadioButton();
         txtFiltro = new javax.swing.JTextField();
-        rdbCPF = new javax.swing.JRadioButton();
+        rbtCPF = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         dtgConCliente = new javax.swing.JTable();
-        rdbCod = new javax.swing.JRadioButton();
+        rbtCod = new javax.swing.JRadioButton();
         btnFechar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta de Clientes");
         setResizable(false);
 
-        groupConCliente.add(rdbNome);
-        rdbNome.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
-        rdbNome.setText("Nome");
-        rdbNome.addChangeListener(new javax.swing.event.ChangeListener() {
+        groupConCliente.add(rbtNome);
+        rbtNome.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        rbtNome.setText("Nome");
+        rbtNome.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                rdbNomeStateChanged(evt);
+                rbtNomeStateChanged(evt);
             }
         });
-        rdbNome.addActionListener(new java.awt.event.ActionListener() {
+        rbtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdbNomeActionPerformed(evt);
+                rbtNomeActionPerformed(evt);
             }
         });
 
@@ -79,29 +90,35 @@ public class View_ConCliente extends javax.swing.JFrame {
                 txtFiltroActionPerformed(evt);
             }
         });
+        txtFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtFiltroKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFiltroKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFiltroKeyTyped(evt);
+            }
+        });
+        txtFiltro.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
+                txtFiltroVetoableChange(evt);
+            }
+        });
 
-        groupConCliente.add(rdbCPF);
-        rdbCPF.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
-        rdbCPF.setText("CPF");
-        rdbCPF.addActionListener(new java.awt.event.ActionListener() {
+        groupConCliente.add(rbtCPF);
+        rbtCPF.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        rbtCPF.setText("CPF");
+        rbtCPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdbCPFActionPerformed(evt);
+                rbtCPFActionPerformed(evt);
             }
         });
 
         dtgConCliente.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         dtgConCliente.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
+            new Object [][] {},
             new String [] {
                 "Cód", "Nome", "CPF"
             }
@@ -113,18 +130,18 @@ public class View_ConCliente extends javax.swing.JFrame {
             dtgConCliente.getColumnModel().getColumn(0).setMaxWidth(90);
         }
 
-        groupConCliente.add(rdbCod);
-        rdbCod.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
-        rdbCod.setText("Código");
-        rdbCod.setSelected(true);
-        rdbCod.addChangeListener(new javax.swing.event.ChangeListener() {
+        groupConCliente.add(rbtCod);
+        rbtCod.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        rbtCod.setText("Código");
+        rbtCod.setSelected(true);
+        rbtCod.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                rdbCodStateChanged(evt);
+                rbtCodStateChanged(evt);
             }
         });
-        rdbCod.addActionListener(new java.awt.event.ActionListener() {
+        rbtCod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdbCodActionPerformed(evt);
+                rbtCodActionPerformed(evt);
             }
         });
 
@@ -148,11 +165,11 @@ public class View_ConCliente extends javax.swing.JFrame {
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(rdbCod, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(rbtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(rdbNome, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(rbtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(14, 14, 14)
-                                .addComponent(rdbCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(rbtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 730, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
@@ -167,9 +184,9 @@ public class View_ConCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rdbCod)
-                    .addComponent(rdbNome)
-                    .addComponent(rdbCPF))
+                    .addComponent(rbtCod)
+                    .addComponent(rbtNome)
+                    .addComponent(rbtCPF))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
@@ -205,35 +222,55 @@ public class View_ConCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnFecharActionPerformed
 
-    private void rdbNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbNomeActionPerformed
+    private void rbtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtNomeActionPerformed
         MudarTexto();
-    }//GEN-LAST:event_rdbNomeActionPerformed
+    }//GEN-LAST:event_rbtNomeActionPerformed
 
-    private void rdbCodStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rdbCodStateChanged
+    private void rbtCodStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rbtCodStateChanged
       
-    }//GEN-LAST:event_rdbCodStateChanged
+    }//GEN-LAST:event_rbtCodStateChanged
 
-    private void rdbNomeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rdbNomeStateChanged
+    private void rbtNomeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rbtNomeStateChanged
     
-    }//GEN-LAST:event_rdbNomeStateChanged
+    }//GEN-LAST:event_rbtNomeStateChanged
 
-    private void rdbCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbCPFActionPerformed
+    private void rbtCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtCPFActionPerformed
         MudarTexto();
-    }//GEN-LAST:event_rdbCPFActionPerformed
+    }//GEN-LAST:event_rbtCPFActionPerformed
 
-    private void rdbCodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbCodActionPerformed
+    private void rbtCodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtCodActionPerformed
         MudarTexto();
-    }//GEN-LAST:event_rdbCodActionPerformed
+    }//GEN-LAST:event_rbtCodActionPerformed
 
     private void txtFiltroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFiltroMouseClicked
        txtFiltro.setText("");
        txtFiltro.setForeground(Color.black);
+        if (rbtCPF.isSelected()==true) {
+            txtFiltro = new JFormattedTextField(Ctrl_Util.Mascara("###.###.###-##"));   
+        }
     }//GEN-LAST:event_txtFiltroMouseClicked
 
     private void txtFiltroFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFiltroFocusGained
        txtFiltro.setText("");
        txtFiltro.setForeground(Color.black);
     }//GEN-LAST:event_txtFiltroFocusGained
+
+    private void txtFiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyPressed
+
+    }//GEN-LAST:event_txtFiltroKeyPressed
+
+    private void txtFiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyReleased
+        Limpar();
+        Popular();
+    }//GEN-LAST:event_txtFiltroKeyReleased
+
+    private void txtFiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyTyped
+        
+    }//GEN-LAST:event_txtFiltroKeyTyped
+
+    private void txtFiltroVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_txtFiltroVetoableChange
+
+    }//GEN-LAST:event_txtFiltroVetoableChange
 
     /**
      * @param args the command line arguments
@@ -282,29 +319,52 @@ public class View_ConCliente extends javax.swing.JFrame {
     private javax.swing.JTable dtgConCliente;
     private javax.swing.ButtonGroup groupConCliente;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JRadioButton rdbCPF;
-    private javax.swing.JRadioButton rdbCod;
-    private javax.swing.JRadioButton rdbNome;
+    private javax.swing.JRadioButton rbtCPF;
+    private javax.swing.JRadioButton rbtCod;
+    private javax.swing.JRadioButton rbtNome;
     private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
 
     private void MudarTexto() {
         
         txtFiltro.setForeground(Color.LIGHT_GRAY);
-        if (rdbCod.isSelected()==true) 
+        if (rbtCod.isSelected()==true) 
         {
             txtFiltro.setText("Informe o código do cliente");
         }
-        else if (rdbNome.isSelected()==true)
+        else if (rbtNome.isSelected()==true)
         {
             txtFiltro.setText("Informe o nome do cliente");
         }
         else
         {
             txtFiltro.setText("Informe o CPF do cliente");
+        }                   
+    }
+    
+    private void Limpar(){
+        dtgConCliente.setModel(new javax.swing.table.DefaultTableModel(
+        new Object [][] {},
+        new String [] {"Cód", "Nome", "CPF"}));
+    }
+    private void Popular(){
+        List<Ctrl_Cliente> ListaDeCliente = new ArrayList<Ctrl_Cliente>();
+        if (rbtCod.isSelected()==true) {
+            ListaDeCliente = Model.Model_Cliente.Busca(txtFiltro.getText(),0);
+        }
+        if (rbtNome.isSelected()==true) {
+            ListaDeCliente = Model.Model_Cliente.Busca(txtFiltro.getText(),1);
+        }
+        if (rbtCPF.isSelected()==true) {
+            ListaDeCliente = Model.Model_Cliente.Busca(txtFiltro.getText(),2);
         }
         
-            
+        DefaultTableModel model = (DefaultTableModel) dtgConCliente.getModel();
+        for (int i = 0; i < ListaDeCliente.size(); i++) {
+            Object[] linha = {ListaDeCliente.get(i).getIdCliente(), ListaDeCliente.get(i).getNome(), ListaDeCliente.get(i).getCpf()};
+            model.addRow(linha);
+        }
+        dtgConCliente.setModel(model);
     }
 
     

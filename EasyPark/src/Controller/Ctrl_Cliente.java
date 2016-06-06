@@ -6,6 +6,7 @@ public class Ctrl_Cliente extends Ctrl_Pessoa {
     
     private String Cnh;
     private String IdPessoa;
+    private String IdCliente;
 
     public String getCnh() {
         return Cnh;
@@ -21,6 +22,14 @@ public class Ctrl_Cliente extends Ctrl_Pessoa {
 
     public void setIdPessoa(String IdPessoa) {
         this.IdPessoa = IdPessoa;
+    }
+
+    public String getIdCliente() {
+        return IdCliente;
+    }
+
+    public void setIdCliente(String IdCliente) {
+        this.IdCliente = IdCliente;
     }
         
 

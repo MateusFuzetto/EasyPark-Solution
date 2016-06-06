@@ -3,11 +3,17 @@ package Model;
 import Controller.Ctrl_Autorizado;
 import Controller.Ctrl_Pessoa;
 import Controller.Ctrl_Util;
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Model_Autorizado{
-  private static ResultSet rs = null;
+    private static ResultSet rs = null;
+    private static ResultSet rs1 = null;
+    private static ResultSet rs2 = null;
+    private static  String sqlString ="";
     public static void Atualizar()
     {
         
@@ -29,7 +35,7 @@ public class Model_Autorizado{
         Autoriazado.setIdPessoa(Model_Pessoa.Salvar(Pessoa,"PESSOA"));
       
         
-        String  sqlString = "insert into AUTORIZADO (CNH, ID_PESSOA) values ('" 
+        sqlString = "insert into AUTORIZADO (CNH, ID_PESSOA) values ('" 
                 +Autoriazado.getCnh()+ "','"
                 +Autoriazado.getIdPessoa()+"')";
         
@@ -58,18 +64,18 @@ public class Model_Autorizado{
     public static Boolean Deletar(String Cod)
     {
        
-       String sqlString = "delete from CLIENTE * where (ID= "+ Cod +")";
+        sqlString = "delete from CLIENTE * where (ID= "+ Cod +")";
                
         
         return true;
     }    
     
-    public static Ctrl_Autorizado  BuscaCliente(String Id_Pessoa, String Cnh )
+    public static Ctrl_Autorizado  BuscaAutorizado(String Id_Pessoa, String Cnh )
     {
         Ctrl_Autorizado Autorizado = new Ctrl_Autorizado();
         try 
         {
-           String sqlString ="SELECT * FROM PESSOA WHERE (ID="+Id_Pessoa+")";
+           sqlString ="SELECT * FROM PESSOA WHERE (ID="+Id_Pessoa+")";
            rs = Model_Banco.BuscaRegistro(sqlString);
            if (rs.next()) {   
                 Autorizado.setId(rs.getString(1));
@@ -94,28 +100,60 @@ public class Model_Autorizado{
         return Autorizado;
     }
     
-     public static String  BuscaCnh(String Id_Pessoa)
+     public static List<Ctrl_Autorizado> Busca(String Id_Cliente)
     {
 
-        String CNH = null;
+        List<String> ListaIdAutorizado = new ArrayList<String>();
+        List<String> ListaIdPessoa = new ArrayList<String>();
+        List<Ctrl_Autorizado> ListaAutorizado = new ArrayList<Ctrl_Autorizado>();
         try 
         {
-           String sqlString ="SELECT CNH FROM CLIENTE WHERE (ID_PESSOA="+Id_Pessoa+")";
-           rs = Model_Banco.BuscaRegistro(sqlString);
-           if (rs.next()) {   
-                CNH = rs.getString(1);
-    
-           }
+            sqlString ="SELECT ID_AUTORIZADO FROM CLIENTE_AUTO WHERE (ID_CLIENTE ="+Id_Cliente+")";
+            rs = Model_Banco.BuscaRegistro(sqlString);
+            while (rs.next()) {
+               String x = rs.getString(1);
+               ListaIdAutorizado.add(x);  
+            }
+           
+            for (int i = 0; i < ListaIdAutorizado.size(); i++) {
+                sqlString ="SELECT ID_PESSOA FROM AUTORIZADO WHERE (ID="+ListaIdAutorizado.get(i)+")";
+                rs = Model_Banco.BuscaRegistro(sqlString);
+                if (rs.next()) {
+                   String x = rs.getString(1);
+                   ListaIdPessoa.add(x);                     
+                }
+            }
+            
+            for (int i = 0; i < ListaIdPessoa.size(); i++) {
+                sqlString ="SELECT * FROM PESSOA WHERE (ID="+ListaIdPessoa.get(i)+")";
+                rs = Model_Banco.BuscaRegistro(sqlString);
+                
+                Ctrl_Autorizado Autorizado = new Ctrl_Autorizado();
+                
+                if (rs.next()) {
+                    Autorizado.setId(rs.getString(1));
+                    Autorizado.setCpf(rs.getString(2));
+                    Autorizado.setNome(rs.getString(3));
+                    Autorizado.setFixo(rs.getString(4));
+                    Autorizado.setCelular(rs.getString(5));
+                    Autorizado.setEmail(rs.getString(6));
+                    Autorizado.setNumero(rs.getString(7));
+                    Autorizado.setCep(rs.getString(8));
+                    Autorizado.setIdAutorizado(ListaIdAutorizado.get(i).toString());
+                    
+                    ListaAutorizado.add(Autorizado);
+                }
+            }
            
            
         } 
         catch (Exception e)
         {
-             return "false";
+             return null;
         }
         
         
-        return CNH;
+        return ListaAutorizado;
     }
        
 }

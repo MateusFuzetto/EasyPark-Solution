@@ -38,6 +38,8 @@ public class View_CadVeiculo extends javax.swing.JFrame {
         btnSalvar2 = new javax.swing.JButton();
         btnDeletar2 = new javax.swing.JButton();
         btnEditar2 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbAutorizados = new javax.swing.JTable();
         txtCod = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -49,7 +51,8 @@ public class View_CadVeiculo extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         txtPlaca = new javax.swing.JFormattedTextField();
         btnFechar = new javax.swing.JButton();
-        btnPesqCod = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tbAutorizados1 = new javax.swing.JTable();
 
         btnLimpar2.setText("Limpar");
         btnLimpar2.setToolTipText("Clique aqui para limpar os campos");
@@ -66,11 +69,23 @@ public class View_CadVeiculo extends javax.swing.JFrame {
         btnEditar2.setText("Editar");
         btnEditar2.setToolTipText("Clique aqui para editar os campos");
 
+        tbAutorizados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null}
+
+            },
+            new String [] {
+                "ID", "Nome"
+            }
+        ));
+        jScrollPane2.setViewportView(tbAutorizados);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Veículo");
         setResizable(false);
 
         txtCod.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        txtCod.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtCod.setEnabled(false);
         txtCod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,6 +147,7 @@ public class View_CadVeiculo extends javax.swing.JFrame {
             erroGenerico.printStackTrace();
             mensagem = erroGenerico.getMessage();
         }
+        txtPlaca.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtPlaca.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
 
         btnFechar.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
@@ -144,29 +160,16 @@ public class View_CadVeiculo extends javax.swing.JFrame {
             }
         });
 
-        btnPesqCod.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
-        btnPesqCod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easypesq.png"))); // NOI18N
-        btnPesqCod.setToolTipText("");
-        btnPesqCod.setBorderPainted(false
-        );
-        btnPesqCod.setContentAreaFilled(false);
-        btnPesqCod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnPesqCod.setDefaultCapable(false);
-        btnPesqCod.setFocusPainted(false);
-        btnPesqCod.setFocusable(false);
-        btnPesqCod.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        btnPesqCod.setMaximumSize(new java.awt.Dimension(38, 44));
-        btnPesqCod.setMinimumSize(null);
-        btnPesqCod.setPreferredSize(new java.awt.Dimension(38, 44));
-        btnPesqCod.setVerifyInputWhenFocusTarget(false);
-        btnPesqCod.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnPesqCodMouseEntered(evt);
+        tbAutorizados1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null}
+
+            },
+            new String [] {
+                "ID", "Nome"
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnPesqCodMouseExited(evt);
-            }
-        });
+        ));
+        jScrollPane3.setViewportView(tbAutorizados1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -178,17 +181,20 @@ public class View_CadVeiculo extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(13, 13, 13)
-                        .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(btnPesqCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(4, 4, 4)
-                        .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(92, 92, 92)
+                        .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(152, 152, 152)
                         .addComponent(jLabel3)
-                        .addGap(10, 10, 10)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -206,32 +212,33 @@ public class View_CadVeiculo extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
+                        .addGap(14, 14, 14)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnPesqCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                        .addGap(15, 15, 15)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))))
-                .addGap(28, 28, 28)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEditar)
                     .addComponent(btnSalvar)
                     .addComponent(btnDeletar)
                     .addComponent(btnLimpar)
                     .addComponent(btnFechar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
         );
 
         pack();
@@ -252,14 +259,6 @@ public class View_CadVeiculo extends javax.swing.JFrame {
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLimparActionPerformed
-
-    private void btnPesqCodMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPesqCodMouseEntered
-
-    }//GEN-LAST:event_btnPesqCodMouseEntered
-
-    private void btnPesqCodMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPesqCodMouseExited
-
-    }//GEN-LAST:event_btnPesqCodMouseExited
 
     /**
      * @param args the command line arguments
@@ -312,13 +311,16 @@ public class View_CadVeiculo extends javax.swing.JFrame {
     private javax.swing.JButton btnFechar2;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnLimpar2;
-    private javax.swing.JButton btnPesqCod;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnSalvar2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable tbAutorizados;
+    private javax.swing.JTable tbAutorizados1;
     private javax.swing.JTextField txtCod;
     private javax.swing.JFormattedTextField txtPlaca;
     // End of variables declaration//GEN-END:variables
