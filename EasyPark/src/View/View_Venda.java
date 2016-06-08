@@ -141,10 +141,8 @@ public class View_Venda extends javax.swing.JFrame {
         btnLimpar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(980, 420));
         setMinimumSize(new java.awt.Dimension(980, 420));
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
-        setPreferredSize(new java.awt.Dimension(980, 420));
 
         jScrollPane02.setVisible(false);
         jScrollPane02.setBackground(new java.awt.Color(255, 255, 255));
@@ -416,34 +414,9 @@ public class View_Venda extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-         jScrollPane02.setVisible(false);
-        jScrollPane01.setVisible(true);
-        btnVoltar.setVisible(false);
-    }//GEN-LAST:event_btnVoltarActionPerformed
-
-    private void btnResponsavelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResponsavelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnResponsavelActionPerformed
-
-    private void txtCPFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCPFFocusLost
-        Pessoa.setId(null);
-        Pessoa = Model_Pessoa.Verificar(txtCPF.getText());
-
-        if (Pessoa.getId()!=null)
-        {
-            txtNome.setText(Pessoa.getNome());
-            
-        }
-    }//GEN-LAST:event_txtCPFFocusLost
-
     private void txtCodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodActionPerformed
 
     }//GEN-LAST:event_txtCodActionPerformed
-
-    private void txtPlacaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPlacaMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPlacaMouseClicked
 
     private void btnProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximoActionPerformed
         jScrollPane02.setVisible(true);
@@ -472,6 +445,31 @@ public class View_Venda extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnLimpar1ActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        jScrollPane02.setVisible(false);
+        jScrollPane01.setVisible(true);
+        btnVoltar.setVisible(false);
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void txtCPFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCPFFocusLost
+        Pessoa.setId(null);
+        Pessoa = Model_Pessoa.Verificar(txtCPF.getText());
+
+        if (Pessoa.getId()!=null)
+        {
+            txtNome.setText(Pessoa.getNome());
+
+        }
+    }//GEN-LAST:event_txtCPFFocusLost
+
+    private void txtPlacaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPlacaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPlacaMouseClicked
+
+    private void btnResponsavelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResponsavelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnResponsavelActionPerformed
 
     private void setLocalizacaoVaga(java.awt.event.MouseEvent evt) {   
 

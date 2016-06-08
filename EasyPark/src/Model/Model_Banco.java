@@ -19,12 +19,12 @@ public static void Open(){
         String driverName = "com.microsoft.sqlserver.jdbc.SQLServerDriver"; //  JDBC driver
         Class.forName(driverName); // Create a conexao  com Banco de dados 
         String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=EASYPARK;";
+        //String user ="sa";
+        //String key ="123456";
         String user ="sa";
-        String key ="123456";
+        String key ="123";
         conexao = DriverManager.getConnection(connectionUrl, user, key);
 
-      
-   
        } 
     catch (ClassNotFoundException e) 
        {
@@ -114,6 +114,20 @@ public static void Open(){
         {
            
         }
+        return rs;
+    }
+    public static ResultSet BuscaVendas(String dataInicio, String dataFim, String status) throws SQLException
+    {
+        ResultSet rs = null;
+        Statement statement = conexao.createStatement();
+        String sqlstring = "select * from Venda where DHORA_INICIAL BETWEEN '" + dataInicio + "' AND '" + dataFim + "' AND STATUS = '" + status + "'";
+        
+        try {
+            rs = statement.executeQuery(sqlstring);
+        } catch (Exception e) {
+            
+        }
+        
         return rs;
     }
 

@@ -28,6 +28,7 @@ public class View_Menu extends javax.swing.JFrame {
 
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        view_ConAutorizado1 = new View.View_ConAutorizado();
         mbMenu = new javax.swing.JMenuBar();
         mnCadastros = new javax.swing.JMenu();
         mniCadCliente = new javax.swing.JMenuItem();
@@ -45,6 +46,7 @@ public class View_Menu extends javax.swing.JFrame {
         mniFinalizacao = new javax.swing.JMenuItem();
         mniCancelamento = new javax.swing.JMenuItem();
         mnRelatorios = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         mnSair = new javax.swing.JMenu();
         mniSair = new javax.swing.JMenuItem();
 
@@ -62,7 +64,7 @@ public class View_Menu extends javax.swing.JFrame {
         mnCadastros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/Easycad.png"))); // NOI18N
         mnCadastros.setMnemonic('c');
         mnCadastros.setText("Cadastros");
-        mnCadastros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        mnCadastros.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         mnCadastros.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
 
         mniCadCliente.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
@@ -211,6 +213,15 @@ public class View_Menu extends javax.swing.JFrame {
         mnRelatorios.setMnemonic('r');
         mnRelatorios.setText("Relatórios");
         mnRelatorios.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+
+        jMenuItem1.setText("Relatório de Vendas");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        mnRelatorios.add(jMenuItem1);
+
         mbMenu.add(mnRelatorios);
 
         mnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/img/EasySair.png"))); // NOI18N
@@ -317,6 +328,11 @@ public class View_Menu extends javax.swing.JFrame {
         frmVenda.setVisible(true);
     }//GEN-LAST:event_mniVendaActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        View_Relatorio frmRelatorio = new View_Relatorio();
+        frmRelatorio.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -356,6 +372,7 @@ public class View_Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuBar mbMenu;
     private javax.swing.JMenu mnCadastros;
     private javax.swing.JMenu mnConsultas;
@@ -375,5 +392,6 @@ public class View_Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem mniFinalizacao;
     private javax.swing.JMenuItem mniSair;
     private javax.swing.JMenuItem mniVenda;
+    private View.View_ConAutorizado view_ConAutorizado1;
     // End of variables declaration//GEN-END:variables
 }
